@@ -6,29 +6,28 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Setter
 @Getter
-public class Livro {
-    
+@Setter
+public class Emprestimo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idLivro;
+    Long idEmprestimo;
+    
+    private Date dataEmprestimo;
 
-    private String titulo;
+    private Date dataDevolucaoPrevista;
 
-    private String editora;
-
-    private Date anoPublicacao;
-
-    private boolean disponivel;
+    private Date dataDevolucao;
 
     @ManyToOne
-    private Autor autor;
+    private Livro idLivro;
+
+    @OneToMany
+    private User idUser;
 }
