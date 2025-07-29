@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping
 public class UserController {
     
 
     @GetMapping("/home")
-    public String getMethodName(@RequestParam String param) {
-        return "index.html";
+    public String getIndex() {
+        return "index";
     }
     
 }
