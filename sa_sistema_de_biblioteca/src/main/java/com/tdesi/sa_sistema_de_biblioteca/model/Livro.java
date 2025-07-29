@@ -30,5 +30,6 @@ public class Livro {
     private boolean disponivel;
 
     @ManyToOne
+    @JoinColumn(name = "idAutor")
     private Autor autor;
 }

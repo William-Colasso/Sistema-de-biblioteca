@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -26,8 +27,10 @@ public class Emprestimo {
     private Date dataDevolucao;
 
     @ManyToOne
+    @JoinColumn(name = "idLivro")
     private Livro idLivro;
 
-    @OneToMany
+    @ManyToOne
+    @JoinColumn(name = "idUser")
     private User idUser;
 }
