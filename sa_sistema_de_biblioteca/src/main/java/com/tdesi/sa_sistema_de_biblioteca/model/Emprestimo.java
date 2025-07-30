@@ -26,11 +26,13 @@ public class Emprestimo {
 
     private Date dataDevolucao;
 
+    private boolean devolvido;
+
     @ManyToOne
     @JoinColumn(name = "idLivro")
-    private Livro idLivro;
+    private Livro livro;
 
     @ManyToOne
     @JoinColumn(name = "idUser")
-    private User idUser;
+    private User user;
 }

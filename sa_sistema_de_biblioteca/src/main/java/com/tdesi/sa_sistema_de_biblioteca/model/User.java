@@ -25,4 +25,6 @@ public class User {
     private String email;
 
     private String telefone;
+
+    private String password;
 }

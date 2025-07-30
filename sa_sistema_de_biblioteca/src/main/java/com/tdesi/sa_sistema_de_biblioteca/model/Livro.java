@@ -32,4 +32,6 @@ public class Livro {
     @ManyToOne
     @JoinColumn(name = "idAutor")
     private Autor autor;
+
+    private int quantidadeTotal;
 }
