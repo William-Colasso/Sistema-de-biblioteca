@@ -1,0 +1,245 @@
+html,body {
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+}
+
+.auth-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chk {
+  display: none;
+}
+
+.signup,
+.login {
+  position: absolute;
+  min-height: 75%;
+  width: 100%;
+  padding: 2em;
+  background-color: #005CAA;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px #00000033;
+  transition: 0.8s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.signup h1,
+.login h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1em;
+  display: block;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.signup label,
+.login label
+ {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1em;
+  display: block;
+  cursor: pointer;
+  transition: .4s ease-in-out;
+  padding: 0.5em;
+  border: solid 8px transparent;
+}
+
+.signup p{
+  color: whitesmoke;
+  text-align: left;
+}
+
+input {
+  width: 80%;
+  padding: 0.75em;
+  margin: 0.5em auto;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: #e0dede;
+  display: block;
+}
+
+button {
+  width: 80%;
+  padding: 0.75em;
+  margin-top: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  color: #005CAA;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Transição entre login e signup */
+.login {
+  transform: translateY(10);
+  z-index: 1;
+  background-color: #f5f5f5;
+  color: #005CAA;
+}
+
+.login h1, .login label {
+  color: #005CAA;
+}
+
+.login label:hover{
+
+  border: solid #005CAA 8px;
+  border-radius: 5px;
+}
+.signup label:hover{
+
+  border: solid #f5f5f5 8px;
+  border-radius: 5px;
+}
+
+#chk:checked~.auth-container .login {
+  transform: translateY(-200%);
+  z-index: 0;
+}
+
+#chk:checked~.auth-container .signup {
+  transform: translateY(0%);
+  z-index: 1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.right-side, .left-side {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.left-side::before{
+  position: relative;
+  content: "";
+  background: linear-gradient(0.25turn, #f5f5f5, #f5f5f5);
+  z-index: 1;
+  width: 100%;
+
+
+
+}
+
+
+.right-side::before{
+  border: 10px #005CAA solid;
+  position: absolute;
+  content: "";
+  background-color: #005CAA;
+  z-index: -1;
+  width: 50%;
+  height: 100%;
+  background-image: radial-gradient(rgb(8, 121, 219), #005CAA);
+  filter: blur(1px);
+}
+
+
+
+
+:root {
+  --duration: 30s; /* Aumentando a duração da animação */
+  --color-1: black;
+  --color-2: #024f92;
+  --color-3: #065fad;
+  --color-4: rgb(0, 92, 170);
+  --color-5:  #077ee6;
+  --color-6:  #0482f0;
+  --color-white: #ffffff; /* Cor branca */
+}
+
+.senaiLogo svg path {
+  stroke-width: 4px;
+  stroke-dasharray: 10 5;
+  stroke-dashoffset: 70;
+  fill-opacity: 1;
+  stroke: var(--color-6); /* Cor inicial */
+  stroke-opacity: 1;
+  animation: boxAnimation var(--duration) ease-in-out infinite;
+  transition: .1s ease-in-out;
+  stroke-opacity: .5;
+}
+
+.senaiLogo svg{
+  
+  top: 500%;
+}
+
+@keyframes boxAnimation {
+  0% {
+    stroke-dasharray: 10 5;
+    stroke-dashoffset: 70;
+    stroke-width: 8;
+    stroke: var(--color-1); /* Cor 1 */
+  }
+  10% {
+    stroke: var(--color-2); /* Transição suave para Cor 2 */
+  }
+  20% {
+    stroke: var(--color-3); /* Transição para Cor 3 */
+  }
+  30% {
+    stroke: var(--color-4); /* Transição para Cor 4 */
+  }
+  40% {
+    stroke: var(--color-5); /* Transição para Cor 5 */
+  }
+  50% {
+    stroke-dasharray: 40 14;
+    stroke-dashoffset: 35;
+    stroke-width: 8;
+    stroke: var(--color-6); /* Cor 6 */
+  }
+  60% {
+    stroke: var(--color-white); /* Cor branca */
+  }
+  70% {
+    stroke: var(--color-1); /* Retorno para Cor 1 */
+  }
+  80% {
+    stroke: var(--color-2); /* Transição suave para Cor 2 */
+  }
+  90% {
+    stroke: var(--color-3); /* Transição para Cor 3 */
+  }
+  100% {
+    stroke-dasharray: 10 5;
+    stroke-dashoffset: 70;
+    stroke-width: 8;
+    stroke: var(--color-4); /* Cor final, retorna para uma cor desejada */
+  }
+}

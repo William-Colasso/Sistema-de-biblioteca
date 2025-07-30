@@ -15,24 +15,66 @@
 
     <header>
         <div id="logoDiv">
-            <img src="/img/LogoSenai-SC.png" alt="Imagem logotipo do SENAI de Santa Catarina">
+            <img src="/img/LogoSenai-SC.png" onclick="window.location ='/home'"
+                alt="Imagem logotipo do SENAI de Santa Catarina">
             <p>Sistemas de bibliotecas SENAI</p>
         </div>
 
         <nav>
-            <a href="#">Crie sua conta/Ver perfil</a>
+            <a href="/user/account">Crie sua conta/Ver perfil</a>
             <a href="#">Veja nosso acervo</a>
             <a href="#">Sobre</a>
         </nav>
 
+        <div id="header-actions">
+            <input type="text" placeholder="Buscar livros..." />
+            <button><i class="fas fa-search"></i></button>
+        </div>
     </header>
-    <main>
 
+    <main>
+        <section class="bem-vindo">
+            <h1>Bem-vindo à Biblioteca Virtual do SENAI</h1>
+            <p>Aqui você encontra uma vasta coleção de livros técnicos, didáticos e materiais complementares para seus
+                estudos e pesquisas.</p>
+        </section>
+
+        <section class="destaques">
+            <h2>Destaques do Mês</h2>
+            <ul>
+                <li><strong>Introdução à Programação</strong> - João da Silva</li>
+                <li><strong>Automação Industrial</strong> - Maria Souza</li>
+                <li><strong>Eletricidade Básica</strong> - Carlos Pereira</li>
+            </ul>
+        </section>
+
+        <section class="servicos">
+            <h2>Serviços Disponíveis</h2>
+            <div class="cards">
+                <div class="card">
+                    <i class="fas fa-book"></i>
+                    <h3>Consulta ao Acervo</h3>
+                    <p>Pesquise livros, apostilas e artigos técnicos diretamente pelo nosso sistema.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Cadastro de Usuário</h3>
+                    <p>Crie sua conta para poder reservar e emprestar livros físicos.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Suporte</h3>
+                    <p>Está com dúvidas? Entre em contato com a equipe de bibliotecários.</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
-
+        <p>&copy; 2025 Biblioteca SENAI Santa Catarina. Todos os direitos reservados.</p>
+        <p>Contato: biblioteca@sc.senai.br | (48) 1234-5678</p>
     </footer>
+
 </body>
 
 </html>
