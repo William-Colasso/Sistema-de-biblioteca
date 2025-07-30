@@ -1,5 +1,9 @@
 package com.tdesi.sa_sistema_de_biblioteca.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.tdesi.sa_sistema_de_biblioteca.service.UserService;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
