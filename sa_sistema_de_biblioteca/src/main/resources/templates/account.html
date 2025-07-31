@@ -58,6 +58,11 @@
                     <p>Senha:</p>
                     <input type="password" name="password" placeholder="Senha" required />
 
+                    <div style="display: flex;flex-direction: row;">
+
+                        <input type="checkbox" id="isBibliotecario">
+                        <p for="isBibliotecario">Você é bibliotecário?</p>
+                    </div>
 
 
                     <button type="submit">Cadastrar</button>
@@ -72,7 +77,7 @@
                     <input type="email" id="loginEmail" name="email" placeholder="E-mail" required />
                     <input type="password" id="loginPassword" name="password" placeholder="Senha" required />
 
-                    <button type="submit">Entrar</button>
+                    <button id="submitLogin" type="submit">Entrar</button>
                     <label for="chk" aria-hidden="true">Cadastre-se</label>
                 </form>
             </div>
@@ -84,7 +89,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const validator = new JustValidate('#signup-form');
+
+            if (!Number.isNaN(Number.parseInt(localStorage.getItem("idUser")))){
+                window.location ="/profile"
+            }
+
+                const validator = new JustValidate('#signup-form');
 
             validator
                 .addField('input[name="name"]', [
@@ -128,6 +138,7 @@
                         email: form.querySelector('input[name="email"]').value,
                         telefone: form.querySelector('input[name="phone"]').value,
                         password: form.querySelector('input[name="password"]').value,
+                        isBibliotecario: document.getElementById("isBibliotecario").value
                     };
 
                     console.log('Usuário válido:', user);
@@ -153,10 +164,13 @@
             const RESPONSEDATA = await RESPONSE.json();
 
             alert("Cadastro feito com sucesso!")
-            document.getElementById("chk").checked = true;
+            document.getElementById("chk").checked = false;
         }
 
-        async function login() {
+        document.getElementById("submitLogin").addEventListener('click', ((event) => login(event)))
+
+        async function login(event) {
+            event.preventDefault();
             const userDTO = {
                 email: document.getElementById("loginEmail").value,
                 password: document.getElementById("loginPassword").value,
@@ -178,9 +192,12 @@
                 const data = await RESPONSE.json();
 
                 // Verifica status
+
                 if (statusCode === 200) {
                     alert("Login feito com sucesso!");
-                    console.log("Resposta:", data);
+
+                    localStorage.setItem("idUser", data.idUser)
+                     window.location ="/profile"
                     // Redirecionamento, armazenamento de token, etc.
                 } else if (statusCode === 404) {
                     alert("Email não encontrado");
