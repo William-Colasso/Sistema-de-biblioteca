@@ -243,3 +243,20 @@ form {
     stroke: var(--color-4); /* Cor final, retorna para uma cor desejada */
   }
 }
+
+
+i{
+  position: absolute;
+  scale: 7;
+  display: flex;
+  align-self: flex-start;
+  left: 5%;
+  top: 7%;
+  color: #005CAA;
+}
+
+i:hover{
+  scale: 8;
+  cursor: pointer;
+  filter: contrast(100);
+}
