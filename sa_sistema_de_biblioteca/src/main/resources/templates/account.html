@@ -72,7 +72,7 @@
                     <input type="email" id="loginEmail" name="email" placeholder="E-mail" required />
                     <input type="password" id="loginPassword" name="password" placeholder="Senha" required />
 
-                    <button type="submit">Entrar</button>
+                    <button id="submitLogin" type="submit">Entrar</button>
                     <label for="chk" aria-hidden="true">Cadastre-se</label>
                 </form>
             </div>
@@ -153,10 +153,13 @@
             const RESPONSEDATA = await RESPONSE.json();
 
             alert("Cadastro feito com sucesso!")
-            document.getElementById("chk").checked = true;
+            document.getElementById("chk").checked = false;
         }
 
-        async function login() {
+        document.getElementById("submitLogin").addEventListener('click', ((event) => login(event)))
+
+        async function login(event) {
+            event.preventDefault();
             const userDTO = {
                 email: document.getElementById("loginEmail").value,
                 password: document.getElementById("loginPassword").value,
@@ -178,9 +181,11 @@
                 const data = await RESPONSE.json();
 
                 // Verifica status
+                
                 if (statusCode === 200) {
                     alert("Login feito com sucesso!");
-                    console.log("Resposta:", data);
+                    
+                    localStorage.setItem("idUser", data.idUser)
                     // Redirecionamento, armazenamento de token, etc.
                 } else if (statusCode === 404) {
                     alert("Email não encontrado");
