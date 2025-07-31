@@ -33,6 +33,13 @@ public class UserController {
     public String getAccount() {
         return "account";
     }
+    
+    @GetMapping("/get")
+    public ResponseEntity<User> getUser(@RequestParam Long idUser) {
+        User user = userService.findByID(idUser);
+        return ResponseEntity.ok().body(user);
+    }
+    
 
     @PostMapping("/login")
     public ResponseEntity<User> postUser(@RequestBody UserLoginDTO userLoginDTO) {
@@ -55,7 +62,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteUser(@PathVariable Long id){
+    public ResponseEntity<?> deleteUser(@PathVariable Long id){
         return userService.deleteUser(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
     

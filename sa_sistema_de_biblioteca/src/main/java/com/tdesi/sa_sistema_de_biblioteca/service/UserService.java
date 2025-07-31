@@ -55,4 +55,11 @@ public class UserService {
         return true;
     }
 
+    public User findByID(Long id){
+        if(!userRepository.existsById(id)){
+            throw new RuntimeException("Usuário não encontrado.");
+        }
+        return userRepository.findById(id).get();
+    }
+
 }
