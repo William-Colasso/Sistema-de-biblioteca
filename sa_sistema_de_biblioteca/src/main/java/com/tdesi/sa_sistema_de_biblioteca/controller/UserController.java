@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tdesi.sa_sistema_de_biblioteca.DTO.UserLoginDTO;
 import com.tdesi.sa_sistema_de_biblioteca.model.User;
 import com.tdesi.sa_sistema_de_biblioteca.service.UserService;
 
@@ -28,9 +29,9 @@ public class UserController {
         return "account";
     }
 
-    @GetMapping()
-    public ResponseEntity<User> getUser(@RequestParam String email, String password) {
-        User getUser = userService.getUser(email, password);
+    @PostMapping("/login")
+    public ResponseEntity<User> getUser(@RequestBody UserLoginDTO userLoginDTO) {
+        User getUser = userService.getUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());
         return ResponseEntity.ok().body(getUser);
     }
     
