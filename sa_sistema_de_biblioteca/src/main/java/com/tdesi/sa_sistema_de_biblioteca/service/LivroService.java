@@ -42,4 +42,8 @@ public class LivroService {
         sb.append("Quantidade Emprestada: "+emprestimoRepository.countEmprestimosAtivosByLivro(livro));
         return sb.toString();
     }
+
+    public Livro findById(Long idLivro) {
+        return livroRepository.findById(idLivro).get();
+    }
 }

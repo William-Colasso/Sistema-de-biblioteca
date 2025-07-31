@@ -7,6 +7,8 @@ import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
 import com.tdesi.sa_sistema_de_biblioteca.model.User;
 import com.tdesi.sa_sistema_de_biblioteca.repository.EmprestimoRepository;
 import com.tdesi.sa_sistema_de_biblioteca.service.EmprestimoService;
+import com.tdesi.sa_sistema_de_biblioteca.service.LivroService;
+import com.tdesi.sa_sistema_de_biblioteca.service.UserService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,6 +32,12 @@ public class EmprestimoController {
 
     @Autowired
     EmprestimoService emprestimoService;
+
+    @Autowired
+    LivroService livroService;
+
+    @Autowired
+    UserService userService;
     
     @PostMapping("/create")
     public ResponseEntity<Emprestimo> postMethodName(@RequestBody Emprestimo emprestimo) {
@@ -47,7 +55,7 @@ public class EmprestimoController {
         if (emprestimo == null) {
             return ResponseEntity.notFound().build();
         }
-
+        
         camposAtualizados.forEach((campo, valor)->{
             switch (campo) {
                 case "dataEmprestimo":
@@ -67,11 +75,15 @@ public class EmprestimoController {
                 break;
 
                 case "idLivro":
-                    emprestimo.setLivro((Livro) valor);
+                    Long idLivro = Long.parseLong(valor.toString());
+                    Livro livro = livroService.findById(idLivro);
+                    emprestimo.setLivro(livro);
                 break;
 
                 case "idUser":
-                    emprestimo.setUser((User) valor);
+                    Long idUser = Long.parseLong(valor.toString());
+                    User user = userService.findByID(idUser);
+                    emprestimo.setUser(user);
                 break;
                 
                 default:
