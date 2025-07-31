@@ -27,4 +27,7 @@ public class User {
     private String telefone;
 
     private String password;
+
+    private boolean isBibliotecario;
+
 }

@@ -29,7 +29,6 @@ public class LivroController {
         return livroService.getTotalLivros();
     }
     
-
     @PostMapping("/register")
     public ResponseEntity<Livro> createBook(@RequestBody Livro livro) {
         Livro save = livroService.save(livro);

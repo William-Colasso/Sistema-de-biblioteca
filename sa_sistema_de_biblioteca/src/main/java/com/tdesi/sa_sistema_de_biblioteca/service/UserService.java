@@ -39,4 +39,20 @@ public class UserService {
 
         return user;
     }
+
+    public User editUser(User user) {
+        if (!userRepository.existsById(user.getIdUser())) {
+            throw new RuntimeException("Usuário não encontrado para edição.");
+        }
+        return userRepository.save(user);
+    }
+
+    public boolean deleteUser(Long id){
+        if (!userRepository.existsById(id)) {
+            return false;
+        }
+        userRepository.deleteById(id);
+        return true;
+    }
+
 }

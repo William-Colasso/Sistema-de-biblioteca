@@ -3,6 +3,7 @@ package com.tdesi.sa_sistema_de_biblioteca.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tdesi.sa_sistema_de_biblioteca.model.Emprestimo;
+import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
 import com.tdesi.sa_sistema_de_biblioteca.model.User;
 import com.tdesi.sa_sistema_de_biblioteca.repository.EmprestimoRepository;
 import com.tdesi.sa_sistema_de_biblioteca.service.EmprestimoService;
@@ -63,6 +64,14 @@ public class EmprestimoController {
 
                 case "devolvido":
                     emprestimo.setDevolvido(Boolean.parseBoolean(String.valueOf(valor)));
+                break;
+
+                case "idLivro":
+                    emprestimo.setLivro((Livro) valor);
+                break;
+
+                case "idUser":
+                    emprestimo.setUser((User) valor);
                 break;
                 
                 default:
