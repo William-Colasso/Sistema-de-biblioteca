@@ -18,20 +18,13 @@ public class EmprestimoService {
     LivroService livroService;
 
     public Emprestimo save(Emprestimo emprestimo) {
-        try {
-            int qtdLivros = livroService.quantidadeDisponivel(emprestimo.getLivro());
+        int qtdLivros = livroService.quantidadeDisponivel(emprestimo.getLivro());
 
-            if (qtdLivros < 1) {
-                throw new LivroIndisponivelException("Não há exemplares disponíveis para empréstimo.");
-            }
-
-            return emprestimoRepository.save(emprestimo);
-        } catch (LivroIndisponivelException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao processar empréstimo: " + e.getMessage());
+        if (qtdLivros < 1) {
+            throw new LivroIndisponivelException("Não há exemplares disponíveis para empréstimo.");
         }
 
+        return emprestimoRepository.save(emprestimo);
     }
 
     public Emprestimo findById(Long id) {

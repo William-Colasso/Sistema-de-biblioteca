@@ -37,7 +37,7 @@ public class LivroService {
         sb.append("ID "+livro.getIdLivro()+"\n");
         sb.append("Titulo do livro: "+livro.getTitulo()+"\n");
         sb.append("Autor do Livro: "+livro.getAutor().getNome()+"\n");
-        sb.append("Quantidade Total:"+livro.getQuantidadeTotal()+"\n");
+        sb.append("Quantidade Total: "+livro.getQuantidadeTotal()+"\n");
         sb.append("Quantidade Disponivel: "+quantidadeDisponivel(livro)+"\n");
         sb.append("Quantidade Emprestada: "+emprestimoRepository.countEmprestimosAtivosByLivro(livro));
         return sb.toString();

@@ -1,10 +1,11 @@
 package com.tdesi.sa_sistema_de_biblioteca.service;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.tdesi.sa_sistema_de_biblioteca.exception.EmailAlreadyExistsException;
-import com.tdesi.sa_sistema_de_biblioteca.exception.EmailNotProvidedException;
 import com.tdesi.sa_sistema_de_biblioteca.model.User;
 import com.tdesi.sa_sistema_de_biblioteca.repository.UserRepository;
 
@@ -13,27 +14,29 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User save(User user){
+    public User save(User user) {
         if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
-            throw new EmailNotProvidedException();
+            throw new IllegalArgumentException("O e-mail deve ser fornecido.");
         }
-
+    
         if (userRepository.findByEmail(user.getEmail()) != null) {
-            throw new EmailAlreadyExistsException(user.getEmail());
+            throw new IllegalStateException("E-mail já está em uso.");
         }
 
         return userRepository.save(user);
     }
 
-    public String getUser(String email, String password){
-        if(userRepository.findByEmail(email) == null){
-            return "Email não existe";
-        }
+    public User getUser(String email, String password) {
         User user = userRepository.findByEmail(email);
-        if(user.getPassword() != password){
-            return "Senha incorreta";
+
+        if (user == null) {
+            throw new NoSuchElementException("Email não existe.");
         }
 
-        return "Sucesso";
+        if (!user.getPassword().equals(password)) {
+            throw new SecurityException("Senha incorreta.");
+        }
+
+        return user;
     }
 }

@@ -1,5 +1,6 @@
 package com.tdesi.sa_sistema_de_biblioteca.controller;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,9 @@ public class UserController {
     }
 
     @GetMapping()
-    public String getUser(@RequestParam String email, String password) {
-        return userService.getUser(email, password);
+    public ResponseEntity<User> getUser(@RequestParam String email, String password) {
+        User getUser = userService.getUser(email, password);
+        return ResponseEntity.ok().body(getUser);
     }
     
 
