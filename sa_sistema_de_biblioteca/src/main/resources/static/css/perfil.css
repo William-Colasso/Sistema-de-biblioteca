@@ -1,0 +1,32 @@
+html,body{
+    background-color: #005CAA;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    height: 150vh;
+}
+
+
+.containerProfile{
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    position: relative;
+    width: 40%;
+    height: 140vh;
+    border-radius: 1.5vw;
+    box-shadow: 10px 10px 100px 10px #518fd6;
+}
+
+
+#profilePic{
+    mix-blend-mode:exclusion ;
+}
+
+.imgProfile{
+    display: flex;
+    justify-content: center;
+    height: 40%;
+    width: auto;
+}
