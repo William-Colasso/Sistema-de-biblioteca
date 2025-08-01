@@ -2,11 +2,15 @@ package com.tdesi.sa_sistema_de_biblioteca.model;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,10 +32,11 @@ public class Livro {
 
     private String sinopse;
 
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String imagemCapa;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria")
+    @Enumerated(EnumType.STRING)
     private CategoriaLivro categoriaLivro;
 
     @ManyToOne
