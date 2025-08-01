@@ -1,48 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f4f8;
     margin: 0;
-    padding: 20px;
-  }
-  
-  .containerLivro {
-    background-color: white;
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    color: #333;
+}
+
+.containerLivro {
+    background-color: #fff;
     max-width: 600px;
-    margin: auto;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
-  }
-  
-  .containerLivro h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  form label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-  }
-  
-  form input, form textarea, form button {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 2.5em;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 92, 170, 0.15);
+    animation: fadeIn 1s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.containerLivro:hover {
+    box-shadow: 0 0 40px rgba(0, 92, 170, 0.25);
+}
+
+.containerLivro h1 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: 2em;
+    color: #005CAA;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+}
+
+form label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #222;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 0.9em;
+    font-size: 1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  form button {
-    background-color: #0278df;
-    color: white;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #005CAA;
+    box-shadow: 0 0 5px rgba(0, 92, 170, 0.4);
+    outline: none;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+form button {
+    width: 100%;
+    padding: 0.9em;
+    font-size: 1.1rem;
+    background-color: #005CAA;
+    color: #fff;
     border: none;
-    margin-top: 20px;
+    border-radius: 6px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 16px;
-  }
-  
-  form button:hover {
-    background-color: #005caa;
-  }
-  
+    transition: background-color 0.3s, transform 0.2s ease;
+}
+
+form button:hover {
+    background-color: #004480;
+    transform: translateY(-2px);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
