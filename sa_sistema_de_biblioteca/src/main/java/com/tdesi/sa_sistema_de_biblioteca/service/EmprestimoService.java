@@ -1,6 +1,5 @@
 package com.tdesi.sa_sistema_de_biblioteca.service;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
-import com.tdesi.sa_sistema_de_biblioteca.model.User;
 import com.tdesi.sa_sistema_de_biblioteca.repository.EmprestimoRepository;
 import com.tdesi.sa_sistema_de_biblioteca.repository.LivroRepository;
 
