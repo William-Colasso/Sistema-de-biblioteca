@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/cadastro-livro.css" />
+    <title>Cadastro de Livro</title>
+</head>
+
+<body>
+    <div class="containerLivro">
+        <h1>Cadastro de Livro</h1>
+        <form id="formLivro">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required />
+
+            <label for="editora">Editora:</label>
+            <input type="text" id="editora" name="editora" required />
+
+            <label for="anoPublicacao">Ano de Publicação:</label>
+            <input type="date" id="anoPublicacao" name="anoPublicacao" required />
+
+            <label for="sinopse">Sinopse:</label>
+            <textarea id="sinopse" name="sinopse"></textarea>
+
+            <label for="imagemCapa">Capa do Livro:</label>
+            <input type="file" id="imagemCapa" accept="image/*" />
+            <img id="previewCapa" src="#" alt="Preview da Capa"
+                style="display:none; max-height:150px; margin:10px 0;" />
+
+            <label for="categoriaLivro">Categoria:</label>
+            <input type="text" id="categoriaLivro" name="categoriaLivro" required />
+
+            <label for="autor">ID do Autor:</label>
+            <input type="number" id="autor" name="autor" required />
+
+            <label for="quantidadeTotal">Quantidade Total:</label>
+            <input type="number" id="quantidadeTotal" name="quantidadeTotal" required />
+
+            <label for="disponivel">
+                <input type="checkbox" id="disponivel" name="disponivel" /> Disponível
+            </label>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('imagemCapa').addEventListener('change', function () {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const preview = document.getElementById('previewCapa');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                preview.setAttribute('data-base64', e.target.result.split(',')[1]); // remove header
+            };
+
+            if (file) reader.readAsDataURL(file);
+        });
+
+        document.getElementById('formLivro').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const capa = document.getElementById('previewCapa').getAttribute('data-base64') || "";
+
+            const livro = {
+                titulo: document.getElementById('titulo').value,
+                editora: document.getElementById('editora').value,
+                anoPublicacao: document.getElementById('anoPublicacao').value,
+                sinopse: document.getElementById('sinopse').value,
+                imagemCapa: capa,
+                disponivel: document.getElementById('disponivel').checked,
+                categoriaLivro: document.getElementById('categoriaLivro').value,
+                autor: { idAutor: parseInt(document.getElementById('autor').value) },
+                quantidadeTotal: parseInt(document.getElementById('quantidadeTotal').value)
+            };
+
+            try {
+                const response = await fetch('/book/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(livro)
+                });
+
+                if (response.ok) {
+                    alert("Livro cadastrado com sucesso!");
+                    document.getElementById('formLivro').reset();
+                    document.getElementById('previewCapa').style.display = 'none';
+                } else {
+                    alert("Erro ao cadastrar o livro.");
+                }
+            } catch (error) {
+                alert("Erro na requisição.");
+                console.error(error);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
