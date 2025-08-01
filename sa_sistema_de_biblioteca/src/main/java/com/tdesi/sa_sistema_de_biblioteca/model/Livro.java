@@ -27,7 +27,13 @@ public class Livro {
 
     private Date anoPublicacao;
 
+    private String sinopse;
+
+    private String imagemCapa;
+
     private boolean disponivel;
+
+    private CategoriaLivro categoriaLivro;
 
     @ManyToOne
     @JoinColumn(name = "idAutor")
