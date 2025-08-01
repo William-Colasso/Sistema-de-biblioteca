@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tdesi.sa_sistema_de_biblioteca.model.Emprestimo;
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
 import com.tdesi.sa_sistema_de_biblioteca.model.User;
-import com.tdesi.sa_sistema_de_biblioteca.repository.EmprestimoRepository;
 import com.tdesi.sa_sistema_de_biblioteca.service.EmprestimoService;
 import com.tdesi.sa_sistema_de_biblioteca.service.LivroService;
 import com.tdesi.sa_sistema_de_biblioteca.service.UserService;
@@ -13,7 +12,6 @@ import com.tdesi.sa_sistema_de_biblioteca.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
