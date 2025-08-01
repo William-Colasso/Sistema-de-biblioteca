@@ -30,8 +30,8 @@ public class Livro {
 
     private String imagemCapa;
 
-    private boolean disponivel;
-
+    @ManyToOne
+    @JoinColumn(name = "categoria")
     private CategoriaLivro categoriaLivro;
 
     @ManyToOne

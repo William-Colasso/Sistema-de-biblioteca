@@ -27,6 +27,17 @@ public class LivroController {
     public List<Livro> getLivros() {
         return livroService.getTotalLivros();
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
+        @RequestParam(required = false) String titulo,
+        @RequestParam(required = false) String editora,
+        @RequestParam(required = false) Long idAutor,
+        @RequestParam(required = false) Long idCategoria
+    ) {
+        List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, idAutor, idCategoria);
+        return ResponseEntity.ok(livros);
+    }
     
     @PostMapping("/register")
     public ResponseEntity<Livro> createBook(@RequestBody Livro livro) {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tdesi.sa_sistema_de_biblioteca.Specification.LivroSpecification;
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
 import com.tdesi.sa_sistema_de_biblioteca.repository.EmprestimoRepository;
 import com.tdesi.sa_sistema_de_biblioteca.repository.LivroRepository;
@@ -44,5 +45,9 @@ public class LivroService {
 
     public Livro findById(Long idLivro) {
         return livroRepository.findById(idLivro).get();
+    }
+
+    public List<Livro> buscarPorFiltros(String titulo, String editora, Long idAutor, Long idCategoria) {
+        return livroRepository.findAll(LivroSpecification.filtrar(titulo, editora, idAutor, idCategoria));
     }
 }
