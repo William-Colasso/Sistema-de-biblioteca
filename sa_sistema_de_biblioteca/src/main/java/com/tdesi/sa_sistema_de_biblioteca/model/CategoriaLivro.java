@@ -1,5 +1,7 @@
 package com.tdesi.sa_sistema_de_biblioteca.model;
 
+import jakarta.persistence.Entity;
+
 
 public enum CategoriaLivro {
     ROMANCE(1),
