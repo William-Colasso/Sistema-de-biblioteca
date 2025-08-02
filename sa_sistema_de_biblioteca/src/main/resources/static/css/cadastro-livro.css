@@ -6,8 +6,9 @@ body {
     margin: 0;
     padding: 2em;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
     min-height: 100vh;
     color: #333;
 }
@@ -15,8 +16,11 @@ body {
 
 
 .containerLivro {
+    
     background-color: #fff;
     max-width: 600px;
+    min-height: 150%;
+    
     width: 100%;
     padding: 2.5em;
     border-radius: 15px;
