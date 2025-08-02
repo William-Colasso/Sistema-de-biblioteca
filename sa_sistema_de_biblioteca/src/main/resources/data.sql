@@ -4,10 +4,10 @@ DELETE FROM user;
 DELETE FROM autor;
 
 -- Inserção de autores
-INSERT INTO autor (id_autor, nome) VALUES
-(1, 'Machado de Assis'),
-(2, 'Stephen King'),
-(3, 'J.K. Rowling');
+INSERT INTO autor (id_autor, nome_autor, foto_autor) VALUES
+(1, 'Machado de Assis', null),
+(2, 'Stephen King', null),
+(3, 'J.K. Rowling', null);
 
 -- Inserção de usuários
 INSERT INTO user (id_user, nome, email, telefone, password, is_bibliotecario) VALUES
