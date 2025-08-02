@@ -1,8 +1,13 @@
+DELETE FROM emprestimo;
+DELETE FROM livro;
+DELETE FROM user;
+DELETE FROM autor;
+
 -- Inserção de autores
-INSERT INTO autor (nome) VALUES
-('Machado de Assis'),
-('Stephen King'),
-('J.K. Rowling');
+INSERT INTO autor (id_autor, nome) VALUES
+(1, 'Machado de Assis'),
+(2, 'Stephen King'),
+(3, 'J.K. Rowling');
 
 -- Inserção de usuários
 INSERT INTO user (id_user, nome, email, telefone, password, is_bibliotecario) VALUES
@@ -10,8 +15,7 @@ INSERT INTO user (id_user, nome, email, telefone, password, is_bibliotecario) VA
 (2, 'Carlos Souza', 'carlos@email.com', '11888888888', 'admin123', 1);
 
 -- Inserção de livros
-INSERT INTO livro (
-    id_livro, titulo, editora, ano_publicacao, sinopse, imagem_capa,
+INSERT INTO livro (id_livro, titulo, editora, ano_publicacao, sinopse, imagem_capa,
     categoria_livro, id_autor, quantidade_total
 ) VALUES
 (1, 'Dom Casmurro', 'Editora Brasil', '1899-01-01', 'Clássico da literatura brasileira.', NULL, 'ROMANCE', 1, 5),
@@ -19,9 +23,8 @@ INSERT INTO livro (
 (3, 'Harry Potter e a Pedra Filosofal', 'Rocco', '1997-01-01', 'Primeiro livro da saga.', NULL, 'FANTASIA', 3, 7);
 
 -- Inserção de empréstimos
-INSERT INTO emprestimo (
-    id_emprestimo, data_emprestimo, data_devolucao_prevista, data_devolucao, devolvido,
+INSERT INTO emprestimo (data_emprestimo, data_devolucao_prevista, data_devolucao, devolvido,
     id_livro, id_user
 ) VALUES
-(1, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY), NULL, 0, 1, 1),
-(2, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY), NULL, 0, 3, 2);
+(CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY), NULL, 0, 1, 1),
+(CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY), NULL, 0, 3, 2);

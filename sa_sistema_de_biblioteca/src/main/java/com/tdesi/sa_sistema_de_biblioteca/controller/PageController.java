@@ -28,6 +28,9 @@ public class PageController {
     public String getCadastroLivro() {
         return "cadastroLivro";
     }
-    
+    @GetMapping("/autor/register")
+    public String getRegister() {
+        return "cadastroAutor";
+    }
     
 }
