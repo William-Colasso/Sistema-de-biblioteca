@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="stylesheet" href="/css/geral.css" />
+    <link rel="stylesheet" href="/css/cadastro-autor.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
+      rel="stylesheet"
+    />
+    
+   
+  
+
+    <link rel="shortcut icon" href="https://estudante.sesisenai.org.br/img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <title>Cadastro de Autor</title>
+  </head>
+
+  <body>
+    <divse class="containerAutor">
+      <h1>Cadastro de Autor</h1>
+      <form id="formAutor">
+        <label for="nomeAutor">Nome do Autor:</label>
+        <input type="text" id="nomeAutor" name="nomeAutor" required />
+
+        <label for="fotoAutor">Foto do Autor:</label>
+        <input type="file" id="fotoAutor" accept="image/*" />
+        <img
+          id="previewAutor"
+          class="preview-autor"
+          src="#"
+          alt="Preview da Foto"
+        />
+
+        <button type="submit">Cadastrar Autor</button>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById("fotoAutor").addEventListener("change", function () {
+        const file = this.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const preview = document.getElementById("previewAutor");
+          preview.src = e.target.result;
+          preview.style.display = "block";
+          preview.setAttribute("data-base64", e.target.result.split(",")[1]); // Remove header
+        };
+
+        if (file) reader.readAsDataURL(file);
+      });
+
+      document.getElementById("formAutor").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const fotoBase64 = document
+          .getElementById("previewAutor")
+          .getAttribute("data-base64") || "";
+
+        const autor = {
+          nomeAutor: document.getElementById("nomeAutor").value,
+          fotoAutor: fotoBase64,
+        };
+
+        try {
+          const response = await fetch("/autor/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(autor),
+          });
+
+          if (response.ok) {
+            alert("Autor cadastrado com sucesso!");
+            document.getElementById("formAutor").reset();
+            document.getElementById("previewAutor").style.display = "none";
+          } else {
+            alert("Erro ao cadastrar o autor.");
+          }
+        } catch (error) {
+          alert("Erro na requisição.");
+          console.error(error);
+        }
+      });
+    </script>
+  </body>
+</html>

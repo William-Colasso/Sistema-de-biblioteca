@@ -1,106 +1,195 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link rel="stylesheet" href="/css/geral.css" />
     <link rel="stylesheet" href="/css/cadastro-livro.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
+      rel="stylesheet"
+    />
+    
+   
+  
+
+    <link rel="shortcut icon" href="https://estudante.sesisenai.org.br/img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <title>Cadastro de Livro</title>
-</head>
+    <style>
+      .option-with-image {
+        display: flex;
+        align-items: center;
+      }
+      .option-with-image img {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
     <div class="containerLivro">
-        <h1>Cadastro de Livro</h1>
-        <form id="formLivro">
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" required />
+      <h1>Cadastro de Livro</h1>
+      <form id="formLivro">
+        <!-- Campos do formulário -->
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required />
 
-            <label for="editora">Editora:</label>
-            <input type="text" id="editora" name="editora" required />
+        <label for="editora">Editora:</label>
+        <input type="text" id="editora" name="editora" required />
 
-            <label for="anoPublicacao">Ano de Publicação:</label>
-            <input type="date" id="anoPublicacao" name="anoPublicacao" required />
+        <label for="anoPublicacao">Ano de Publicação:</label>
+        <input type="date" id="anoPublicacao" name="anoPublicacao" required />
 
-            <label for="sinopse">Sinopse:</label>
-            <textarea id="sinopse" name="sinopse"></textarea>
+        <label for="sinopse">Sinopse:</label>
+        <textarea id="sinopse" name="sinopse"></textarea>
 
-            <label for="imagemCapa">Capa do Livro:</label>
-            <input type="file" id="imagemCapa" accept="image/*" />
-            <img id="previewCapa" src="#" alt="Preview da Capa"
-                style="display:none; max-height:150px; margin:10px 0;" />
+        <label for="imagemCapa">Capa do Livro:</label>
+        <input type="file" id="imagemCapa" accept="image/*" />
+        <img
+          id="previewCapa"
+          src="#"
+          alt="Preview da Capa"
+          style="display: none; max-height: 150px; margin: 10px 0"
+        />
 
-            <label for="categoriaLivro">Categoria:</label>
-            <input type="text" id="categoriaLivro" name="categoriaLivro" required />
+        <label for="categoriaLivro">Categoria:</label>
+        <input type="text" id="categoriaLivro" name="categoriaLivro" required />
 
-            <label for="autor">ID do Autor:</label>
-            <input type="number" id="autor" name="autor" required />
+        <label for="autor">Autor:</label>
+        <select
+          name="autor"
+          id="autor"
+          placeholder="Selecione um autor..."
+        ></select>
 
-            <label for="quantidadeTotal">Quantidade Total:</label>
-            <input type="number" id="quantidadeTotal" name="quantidadeTotal" required />
+        <label for="quantidadeTotal">Quantidade Total:</label>
+        <input
+          min="1"
+          type="number"
+          id="quantidadeTotal"
+          name="quantidadeTotal"
+          required
+        />
 
-            <label for="disponivel">
-                <input type="checkbox" id="disponivel" name="disponivel" /> Disponível
-            </label>
-
-            <button type="submit">Cadastrar</button>
-        </form>
+        <button type="submit">Cadastrar</button>
+      </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
     <script>
-        document.getElementById('imagemCapa').addEventListener('change', function () {
+      document.addEventListener("DOMContentLoaded", async () => {
+        // Carregar autores e preencher o select
+        try {
+          const response = await fetch("/autor/all", { method: "GET" });
+          if (!response.ok) throw new Error("Erro ao buscar autores.");
+
+          const autores = await response.json();
+          const select = document.getElementById("autor");
+
+          autores.forEach((autor) => {
+            const option = document.createElement("option");
+            option.value = autor.idAutor;
+            option.textContent = autor.nomeAutor;
+            option.dataset.img = autor.fotoAutor; // Aqui adicionamos a imagem como data-img
+            select.appendChild(option);
+          });
+
+          // Inicializa o TomSelect com imagens customizadas
+          new TomSelect("#autor", {
+            render: {
+              option: function (data, escape) {
+                return `<div class="option-with-image">
+                          <img src="${data.element.dataset.img}" alt="${escape(
+                  data.text
+                )}"/>
+                          <span>${escape(data.text)}</span>
+                        </div>`;
+              },
+              item: function (data, escape) {
+                return `<div class="option-with-image">
+                          <img src="${data.element.dataset.img}" alt="${escape(
+                  data.text
+                )}"/>
+                          <span>${escape(data.text)}</span>
+                        </div>`;
+              },
+            },
+          });
+        } catch (error) {
+          console.error("Erro ao buscar autores:", error);
+        }
+
+        // Preview da imagem da capa
+        document
+          .getElementById("imagemCapa")
+          .addEventListener("change", function () {
             const file = this.files[0];
             const reader = new FileReader();
 
             reader.onload = function (e) {
-                const preview = document.getElementById('previewCapa');
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-                preview.setAttribute('data-base64', e.target.result.split(',')[1]); // remove header
+              const preview = document.getElementById("previewCapa");
+              preview.src = e.target.result;
+              preview.style.display = "block";
+              preview.setAttribute(
+                "data-base64",
+                e.target.result.split(",")[1]
+              );
             };
 
             if (file) reader.readAsDataURL(file);
-        });
+          });
 
-        document.getElementById('formLivro').addEventListener('submit', async function (e) {
+        // Submissão do formulário
+        document
+          .getElementById("formLivro")
+          .addEventListener("submit", async function (e) {
             e.preventDefault();
 
-            const capa = document.getElementById('previewCapa').getAttribute('data-base64') || "";
+            const capa =
+              document
+                .getElementById("previewCapa")
+                .getAttribute("data-base64") || "";
 
             const livro = {
-                titulo: document.getElementById('titulo').value,
-                editora: document.getElementById('editora').value,
-                anoPublicacao: document.getElementById('anoPublicacao').value,
-                sinopse: document.getElementById('sinopse').value,
-                imagemCapa: capa,
-                disponivel: document.getElementById('disponivel').checked,
-                categoriaLivro: document.getElementById('categoriaLivro').value,
-                autor: { idAutor: parseInt(document.getElementById('autor').value) },
-                quantidadeTotal: parseInt(document.getElementById('quantidadeTotal').value)
+              titulo: document.getElementById("titulo").value,
+              editora: document.getElementById("editora").value,
+              anoPublicacao: document.getElementById("anoPublicacao").value,
+              sinopse: document.getElementById("sinopse").value,
+              imagemCapa: capa,
+              categoriaLivro: document.getElementById("categoriaLivro").value,
+              autor: {
+                idAutor: parseInt(document.getElementById("autor").value),
+              },
+              quantidadeTotal: parseInt(
+                document.getElementById("quantidadeTotal").value
+              ),
             };
 
             try {
-                const response = await fetch('/book/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(livro)
-                });
+              const response = await fetch("/book/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(livro),
+              });
 
-                if (response.ok) {
-                    alert("Livro cadastrado com sucesso!");
-                    document.getElementById('formLivro').reset();
-                    document.getElementById('previewCapa').style.display = 'none';
-                } else {
-                    alert("Erro ao cadastrar o livro.");
-                }
+              if (response.ok) {
+                alert("Livro cadastrado com sucesso!");
+                document.getElementById("formLivro").reset();
+                document.getElementById("previewCapa").style.display = "none";
+              } else {
+                alert("Erro ao cadastrar o livro.");
+              }
             } catch (error) {
-                alert("Erro na requisição.");
-                console.error(error);
+              alert("Erro na requisição.");
+              console.error(error);
             }
-        });
-
+          });
+      });
     </script>
-</body>
-
+  </body>
 </html>

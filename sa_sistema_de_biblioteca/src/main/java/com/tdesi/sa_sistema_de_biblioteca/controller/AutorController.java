@@ -11,14 +11,20 @@ import com.tdesi.sa_sistema_de_biblioteca.model.Autor;
 import com.tdesi.sa_sistema_de_biblioteca.repository.AutorRepository;
 
 @Controller
-@RequestMapping
+@RequestMapping("/autor")
 public class AutorController {
 
     @Autowired
     AutorRepository autorRepository;
     
-    @GetMapping("/autor")
+    @GetMapping("/all")
     public List<Autor> getAutor(){
         return autorRepository.findAll();
+    }
+
+
+    @GetMapping("/register")
+    public String getRegister() {
+        return "cadastroAutor";
     }
 }
