@@ -26,7 +26,8 @@ public class Livro {
 
     private String titulo;
 
-    private String editora;
+    @Enumerated(EnumType.STRING)
+    private EditoraLivro editora;
 
     private Date anoPublicacao;
 

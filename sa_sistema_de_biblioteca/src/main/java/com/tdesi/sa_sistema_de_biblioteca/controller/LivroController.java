@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tdesi.sa_sistema_de_biblioteca.model.EditoraLivro;
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
 import com.tdesi.sa_sistema_de_biblioteca.service.LivroService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +49,11 @@ public class LivroController {
     @GetMapping("/relatorio")
     public String getRelatorio(@RequestParam String titulo) {
         return livroService.relatorio(titulo);
+    }
+
+    @GetMapping("/editoras")
+    public ResponseEntity<EditoraLivro[]> getEditora(){
+        return ResponseEntity.ok().body(EditoraLivro.values());
     }
     
 }
