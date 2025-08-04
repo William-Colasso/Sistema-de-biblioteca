@@ -1,7 +1,4 @@
-DELETE FROM emprestimo;
-DELETE FROM livro;
-DELETE FROM user;
-DELETE FROM autor;
+
 
 -- Inserção de autores
 INSERT INTO autor (id_autor, nome_autor, foto_autor) VALUES
@@ -18,9 +15,9 @@ INSERT INTO user (id_user, nome, email, telefone, password, is_bibliotecario) VA
 INSERT INTO livro (id_livro, titulo, editora, ano_publicacao, sinopse, imagem_capa,
     categoria_livro, id_autor, quantidade_total
 ) VALUES
-(1, 'Dom Casmurro', 'Editora Brasil', '1899-01-01', 'Clássico da literatura brasileira.', NULL, 'ROMANCE', 1, 5),
-(2, 'It - A Coisa', 'Suma', '1986-01-01', 'Obra de terror de Stephen King.', NULL, 'TERROR', 2, 3),
-(3, 'Harry Potter e a Pedra Filosofal', 'Rocco', '1997-01-01', 'Primeiro livro da saga.', NULL, 'FANTASIA', 3, 7);
+(1, 'Dom Casmurro', 'CARAMURE', '1899-01-01', 'Clássico da literatura brasileira.', NULL, 'ROMANCE', 1, 5),
+(2, 'It - A Coisa', 'CARAMURE', '1986-01-01', 'Obra de terror de Stephen King.', NULL, 'TERROR', 2, 3),
+(3, 'Harry Potter e a Pedra Filosofal', 'CARAMURE', '1997-01-01', 'Primeiro livro da saga.', NULL, 'FANTASIA', 3, 7);
 
 -- Inserção de empréstimos
 INSERT INTO emprestimo (data_emprestimo, data_devolucao_prevista, data_devolucao, devolvido,
