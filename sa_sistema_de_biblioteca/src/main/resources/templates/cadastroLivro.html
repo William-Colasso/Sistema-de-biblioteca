@@ -35,6 +35,36 @@
   </head>
 
   <body>
+    <header>
+      <div id="logoDiv">
+        <img
+          src="/img/senai-logo.png"
+          onclick="window.location ='/home'"
+          alt="Imagem logotipo do SENAI de Santa Catarina"
+        />
+        <p>Sistemas de bibliotecas SENAI</p>
+      </div>
+
+      <nav>
+        <a href="/home">Home <i class="fa-solid fa-house"></i> </a>
+        <a id="account" href="/user/account"
+          >Crie sua conta/Ver perfil <i class="fa-solid fa-user"></i
+        ></a>
+        <a href="/browse">Nosso acervo <i class="fa-solid fa-book"></i></a>
+        <a href="/categorias"
+          >Categorias <i class="fa-regular fa-bookmark"></i>
+        </a>
+        <a id="lastItemNav" href="/user/libraria"
+          >Seção bibliotecário <i class="fa-solid fa-user-secret"></i
+        ></a>
+      </nav>
+
+      <div id="header-actions">
+        <input type="text" placeholder="Buscar livros..." />
+        <button><i class="fas fa-search"></i></button>
+      </div>
+    </header>
+
     <div class="containerLivro">
       <h1>Cadastro de Livro</h1>
       <form id="formLivro">
@@ -43,7 +73,7 @@
         <input type="text" id="titulo" name="titulo" required />
 
         <label for="editora">Editora:</label>
-        <input type="text" id="editora" name="editora" required />
+        <select name="editora" id="editora"></select>
 
         <label for="anoPublicacao">Ano de Publicação:</label>
         <input type="date" id="anoPublicacao" name="anoPublicacao" required />
@@ -84,150 +114,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        async function preencherCategorias() {
-          const response = await fetch("/categoria", { method: "GET" });
-          if (!response.ok) throw new Error("Erro ao buscar autores.");
-
-          const categorias = await response.json();
-
-          const select = document.getElementById("categoriaLivro");
-          console.log("Response: "+response)
-          console.log("Select: "+select)
-          categorias.forEach((categoria) => {
-            const option = document.createElement("option");
-            option.value = categoria;
-            option.textContent = categoria;
-            
-            select.appendChild(option);
-          });
-        }
-        try {
-          preencherCategorias()
-          const response = await fetch("/autor/all", { method: "GET" });
-          if (!response.ok) throw new Error("Erro ao buscar autores.");
-
-          const autores = await response.json();
-          const select = document.getElementById("autor");
-
-          // Criação das opções com imagem base64
-          autores.forEach((autor) => {
-            const option = document.createElement("option");
-            option.value = autor.idAutor;
-            option.textContent = autor.nomeAutor;
-            option.setAttribute(
-              "data-img",
-              `data:image/png;base64,${autor.fotoAutor}`
-            );
-            select.appendChild(option);
-          });
-
-          // Inicialização do TomSelect
-          new TomSelect("#autor", {
-            render: {
-              option: function (data, escape) {
-                return `
-            <div class="option-with-image">
-              <img src="${escape(data.img)}" alt="${escape(
-                  data.text
-                )}" style="width:30px;height:30px;border-radius:50%;margin-right:8px;">
-              <span>${escape(data.text)}</span>
-            </div>`;
-              },
-              item: function (data, escape) {
-                return `
-            <div class="option-with-image">
-              <img src="${escape(data.img)}" alt="${escape(
-                  data.text
-                )}" style="width:20px;height:20px;border-radius:50%;margin-right:6px;">
-              <span>${escape(data.text)}</span>
-            </div>`;
-              },
-            },
-            onInitialize() {
-              this.options = Object.fromEntries(
-                [...this.select.options].map((opt) => [
-                  opt.value,
-                  {
-                    value: opt.value,
-                    text: opt.textContent,
-                    img: opt.getAttribute("data-img"),
-                  },
-                ])
-              );
-            },
-          });
-        } catch (error) {
-          console.error("Erro ao buscar autores:", error);
-        }
-
-        // Preview da imagem da capa
-        document
-          .getElementById("imagemCapa")
-          .addEventListener("change", function () {
-            const file = this.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-              const preview = document.getElementById("previewCapa");
-              preview.src = e.target.result;
-              preview.style.display = "block";
-              preview.setAttribute(
-                "data-base64",
-                e.target.result.split(",")[1]
-              );
-            };
-
-            if (file) reader.readAsDataURL(file);
-          });
-
-        // Submissão do formulário
-        document
-          .getElementById("formLivro")
-          .addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            const capa =
-              document
-                .getElementById("previewCapa")
-                .getAttribute("data-base64") || "";
-
-            const livro = {
-              titulo: document.getElementById("titulo").value,
-              editora: document.getElementById("editora").value,
-              anoPublicacao: document.getElementById("anoPublicacao").value,
-              sinopse: document.getElementById("sinopse").value,
-              imagemCapa: capa,
-              categoriaLivro: document.getElementById("categoriaLivro").value,
-              autor: {
-                idAutor: parseInt(document.getElementById("autor").value),
-              },
-              quantidadeTotal: parseInt(
-                document.getElementById("quantidadeTotal").value
-              ),
-            };
-
-            try {
-              const response = await fetch("/book/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(livro),
-              });
-
-              if (response.ok) {
-                alert("Livro cadastrado com sucesso!");
-                document.getElementById("formLivro").reset();
-                document.getElementById("previewCapa").style.display = "none";
-              } else {
-                alert("Erro ao cadastrar o livro.");
-              }
-            } catch (error) {
-              alert("Erro na requisição.");
-              console.error(error);
-            }
-          });
-      });
-    </script>
+    <script src="/js/geral.js"></script>
+    <script src="/js/cadastro-livro.js"></script>
   </body>
 </html>

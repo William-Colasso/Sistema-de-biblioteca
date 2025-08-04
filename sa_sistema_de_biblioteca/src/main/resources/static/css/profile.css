@@ -4,13 +4,17 @@ body {
     justify-content: center;
     align-content: center;
     align-items: center;
-    overflow-y: scroll;
+    
     height: 150vh;
     font-family: "Montserrat";
 }
 
 
+body{
+    overflow-y: hidden;
+}
 .containerProfile {
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,6 +26,7 @@ body {
     height: auto;
     border-radius: 1.5vw;
     animation: boxShadow 10s infinite;
+    gap: 0;
 }
 
 @keyframes boxShadow {
@@ -41,16 +46,22 @@ body {
 
 
 #profilePic {
-    mix-blend-mode: exclusion;
+    display: flex;
+    width: 20vw;
+    height: 20vw;
+
+    align-self: center;
 }
 
 .imgProfile {
     display: flex;
     justify-content: center;
-    height: 40%;
-    width: auto;
+    align-content: center;
+    align-items: center;
+    width: 20vw;
+    height: 20vw;
     border-radius: 100%;
-    
+   
 }
 
 
@@ -58,8 +69,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
-    height: 99%;
+    margin: 10%;
+    max-height: 99%;
     width: 80%;
     border: solid 0.1vw #ccc;
     border-radius: 0.5vw;
@@ -137,7 +148,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     margin-top: 2vh;
-    border: 3px solid #aa7d00;
+    border: 3px solid #005CAA;
 }
 
 .containerButtons{

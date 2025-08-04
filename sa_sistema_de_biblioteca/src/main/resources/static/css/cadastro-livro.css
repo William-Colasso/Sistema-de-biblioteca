@@ -4,10 +4,10 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-image: url("/img/patternLivro.png");
     margin: 0;
-    padding: 2em;
+    padding: 0;
     display: flex;
     justify-content: flex-start;
-    align-content: center;
+    align-content: flex-start;
     align-items: center;
     min-height: 100vh;
     color: #333;
@@ -16,7 +16,7 @@ body {
 
 
 .containerLivro {
-    
+    margin-top: 2em;
     background-color: #fff;
     max-width: 600px;
     min-height: 150%;

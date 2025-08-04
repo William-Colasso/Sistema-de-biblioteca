@@ -1,6 +1,5 @@
 package com.tdesi.sa_sistema_de_biblioteca.model;
 
-
 public enum CategoriaLivro {
     ROMANCE(1),
     TERROR(2),
@@ -22,7 +21,30 @@ public enum CategoriaLivro {
     AUTOAJUDA(18),
     FANTASIA(19),
     INFANTIL(20),
-    JUVENIL(21);
+    JUVENIL(21),
+
+    // Categorias SENAI / Técnicas
+    INDUSTRIA(22),
+    ELETRICIDADE(23),
+    MECANICA(24),
+    ELETRONICA(25),
+    ROBOTICA(26),
+    AUTOMACAO(27),
+    INFORMATICA(28),
+    PROGRAMACAO(29),
+    ENGENHARIA(30),
+    SEGURANCA_DO_TRABALHO(31),
+    LOGISTICA(32),
+    GESTAO(33),
+    ADMINISTRACAO(34),
+    EMPREENDEDORISMO(35),
+    MEIO_AMBIENTE(36),
+    SUSTENTABILIDADE(37),
+    DESENHO_TECNICO(38),
+    METROLOGIA(39),
+    SOLDAGEM(40),
+    USINAGEM(41),
+    MATERIAIS(42);
 
     private final int codigo;
 

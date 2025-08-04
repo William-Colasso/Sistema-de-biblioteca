@@ -3,12 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/cadastro-autor.css" />
+    <link rel="stylesheet" href="/css/bibliotecario.css" />
     <link rel="stylesheet" href="/css/geral.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
-      rel="stylesheet"
-    />
 
     <link
       rel="shortcut icon"
@@ -18,7 +14,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <title>Cadastro de Autor</title>
+    <title>Seção bibliotecário</title>
   </head>
 
   <body>
@@ -52,25 +48,22 @@
       </div>
     </header>
 
-    <div class="containerAutor">
-      <h1>Cadastro de Autor</h1>
-      <form id="formAutor">
-        <label for="nomeAutor">Nome do Autor:</label>
-        <input type="text" id="nomeAutor" name="nomeAutor" required />
-
-        <label for="fotoAutor">Foto do Autor:</label>
-        <input type="file" id="fotoAutor" accept="image/*" />
-        <img
-          id="previewAutor"
-          class="preview-autor"
-          src="#"
-          alt="Preview da Foto"
-        />
-
-        <button type="submit">Cadastrar Autor</button>
-      </form>
+    <div class="containerCard">
+        <div id="emprestimo" class="cardFerramenta">
+            <i class="fa-solid fa-landmark"></i>
+            <p>Empréstimo</p>
+        </div>
+        <div id="livro" class="cardFerramenta">
+            <i class="fa-solid fa-book"></i>
+            <p>Cadastrar livro</p>
+        </div>
+        <div id="autor" class="cardFerramenta">
+            <i class="fa-solid fa-person"></i>
+            <p>Cadastrar autor</p>
+        </div>
     </div>
 
-    <script src="/js/cadastro-autor.js"></script>
+    <script src="/js/geral.js"></script>
+    <script src="/js/bibliotecario.js"></script>
   </body>
 </html>

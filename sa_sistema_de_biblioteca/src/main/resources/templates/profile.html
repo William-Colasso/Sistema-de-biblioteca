@@ -1,185 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/geral.css" />
-    <link rel="stylesheet" href="/css/perfil.css" />
-    <link rel="shortcut icon" href="https://estudante.sesisenai.org.br/img/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <link
+      rel="shortcut icon"
+      href="https://estudante.sesisenai.org.br/img/favicon.ico"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <title>Seu perfil</title>
-</head>
+  </head>
 
-<body>
+  <body>
+    <header>
+      <div id="logoDiv">
+        <img
+          src="/img/senai-logo.png"
+          onclick="window.location ='/home'"
+          alt="Imagem logotipo do SENAI de Santa Catarina"
+        />
+        <p>Sistemas de bibliotecas SENAI</p>
+      </div>
 
+      <nav>
+        <a href="/home">Home <i class="fa-solid fa-house"></i> </a>
+        <a id="account" href="/user/account"
+          >Crie sua conta/Ver perfil <i class="fa-solid fa-user"></i
+        ></a>
+        <a href="/browse">Nosso acervo <i class="fa-solid fa-book"></i></a>
+        <a href="/categorias"
+          >Categorias <i class="fa-regular fa-bookmark"></i>
+        </a>
+        <a id="lastItemNav" href="/user/libraria"
+          >Seção bibliotecário <i class="fa-solid fa-user-secret"></i
+        ></a>
+      </nav>
+
+      <div id="header-actions">
+        <input type="text" placeholder="Buscar livros..." />
+        <button><i class="fas fa-search"></i></button>
+      </div>
+    </header>
 
     <div class="containerProfile">
-        <div class="imgProfile">
-            <img id="profilePic" src="https://i.pinimg.com/474x/73/14/cc/7314cc1a88bf3cdc48347ab186e12e81.jpg"
-                alt="Imagem de perfil do usuário">
-        </div>
+      <div class="imgProfile">
+        <img
+          id="profilePic"
+          src="https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/fd35c-no-user-image-icon-27.png?fit=500%2C500&ssl=1"
+          alt="Imagem de perfil do usuário"
+        />
+      </div>
 
-        <div class="profileInfo">
-            <form id="signup-form" action="/user/1">
-                <div class="containerButtons">
+      <div class="profileInfo">
+        <form id="signup-form" action="/user/1">
+          <div class="containerButtons">
+            <button onclick="changeStateInputs()" id="edit" type="button">
+              <i class="fa-solid fa-pen"></i> Editar
+            </button>
+            <button
+              id="save"
+              disabled
+              style="
+                background-color: #0278df;
+                border-color: #005caa;
+                color: #f5f5f5;
+              "
+              type="submit"
+            >
+              <i class="fa-solid fa-floppy-disk"></i> Salvar
+            </button>
+          </div>
 
-                    <button onclick="changeStateInputs()" id="edit" type="button"><i class="fa-solid fa-pen"></i>
-                        Editar</button>
-                    <button id="save" disabled style="background-color: #0278df; border-color: #005CAA; color:#f5f5f5;"
-                        type="submit"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+          <label for="name">Nome:</label>
+          <input disabled type="text" name="name" />
+          <label for="email">Email:</label>
+          <input
+            disabled
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            required
+          />
+          <label for="tel">Telefone:</label>
+          <input disabled type="tel" name="phone" placeholder="Telefone" />
+          <label for="password">Senha:</label>
+          <input
+            disabled
+            type="password"
+            name="password"
+            placeholder="Senha"
+            required
+          />
 
-                </div>
-
-
-
-                <label for="name">Nome:</label>
-                <input disabled type="text" name="name">
-                <label for="email">Email:</label>
-                <input disabled type="email" name="email" placeholder="E-mail" required />
-                <label for="tel">Telefone:</label>
-                <input disabled type="tel" name="phone" placeholder="Telefone" />
-                <label for="password">Senha:</label>
-                <input disabled type="password" name="password" placeholder="Senha" required />
-
-                <div style="display: flex;flex-direction: row;">
-
-                    <input disabled type="checkbox" id="isBibliotecario">
-                    <label for="isBibliotecario">Você é bibliotecário?</label>
-                </div>
-
-            </form>
-
-
-
-        </div>
+          <div style="display: flex; flex-direction: row">
+            <input disabled type="checkbox" id="isBibliotecario" />
+            <label for="isBibliotecario">Você é bibliotecário?</label>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/just-validate@4.3.0/dist/just-validate.production.min.js"></script>
-    <script>
-
-        async function getUsuario(ID_USER) {
-            const RESPONSE = await fetch("/user/get?idUser=" + ID_USER, {
-                method: "GET",
-            });
-            const statusCode = RESPONSE.status;
-            let jsonR = await RESPONSE.json()
-
-            if (statusCode == 200) {
-                
-
-                document.querySelector('[name="name"]').value = jsonR.nome
-                document.querySelector('[name="email"]').value = jsonR.email
-                document.querySelector('[name="phone"]').value = jsonR.telefone
-                document.querySelector('[name="password"]').value = jsonR.password
-                document.getElementById("isBibliotecario").checked = jsonR.bibliotecario
-            }
-            console.log(jsonR)
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const ID_USER = localStorage.getItem("idUser")
-            
-
-            if (Number.isNaN(Number.parseInt(ID_USER))) {
-                window.location = "/home"
-            }
-
-            getUsuario(ID_USER)
-
-
-
-
-
-            const validator = new JustValidate('#signup-form');
-
-            validator
-                .addField('input[name="name"]', [
-                    {
-                        rule: 'required',
-                        errorMessage: 'Nome é obrigatório',
-                    },
-                    {
-                        rule: 'minLength',
-                        value: 3,
-                        errorMessage: 'Nome muito curto',
-                    }
-                ])
-                .addField('input[name="email"]', [
-                    {
-                        rule: 'required',
-                        errorMessage: 'E-mail é obrigatório',
-                    },
-                    {
-                        rule: 'email',
-                        errorMessage: 'E-mail inválido',
-                    }
-                ])
-                .addField('input[name="password"]', [
-                    {
-                        rule: 'required',
-                        errorMessage: 'Senha é obrigatória',
-                    },
-                    {
-                        rule: 'minLength',
-                        value: 6,
-                        errorMessage: 'A senha deve ter pelo menos 6 caracteres',
-                    }
-                ])
-                .onSuccess((event) => {
-                    event.preventDefault();
-
-                    const form = document.getElementById('signup-form');
-                    
-                    const user = {
-                        idUser: ID_USER,
-                        nome: form.querySelector('input[name="name"]').value,
-                        email: form.querySelector('input[name="email"]').value,
-                        telefone: form.querySelector('input[name="phone"]').value,
-                        password: form.querySelector('input[name="password"]').value,
-                        bibliotecario: document.getElementById("isBibliotecario").checked
-                    };
-
-                    console.log('Usuário válido:', user);
-
-                    editar(user);
-
-                    window.location.reload()
-                    // Aqui você pode enviar os dados manualmente ou deixar o formulário enviar normalmente:
-                    // form.submit();
-                });
-        });
-
-
-        async function editar(user) {
-            const RESPONSE = await fetch("/user/" + user.idUser, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            });
-
-            const RESPONSEDATA = await RESPONSE.json();
-
-            alert("Perfil salvo com sucesso!")
-            document.getElementById("chk").checked = false;
-
-            
-
-        }
-
-        function changeStateInputs() {
-            let inputsArr = Array.from(document.querySelectorAll("input")).concat(Array.from(document.querySelectorAll("button")))
-
-            inputsArr.forEach((input) => {
-                input.disabled = !input.disabled
-            })
-        }
-
-
-
-    </script>
-</body>
-
+    <script src="/js/profile.js"></script>
+  </body>
 </html>

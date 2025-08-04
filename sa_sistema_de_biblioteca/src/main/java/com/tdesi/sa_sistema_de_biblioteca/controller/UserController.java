@@ -43,6 +43,12 @@ public class UserController {
         return ResponseEntity.ok(relatorio);
     }
 
+    @GetMapping("/libraria")
+    public String getMethodName() {
+        return "bibliotecario";
+    }
+    
+
     @PostMapping("/login")
     public ResponseEntity<User> postUser(@RequestBody UserLoginDTO userLoginDTO) {
         User getUser = userService.getUser(userLoginDTO.getEmail(), userLoginDTO.getPassword());

@@ -52,8 +52,8 @@ public class LivroController {
     }
 
     @GetMapping("/editoras")
-    public ResponseEntity<EditoraLivro[]> getEditora(){
-        return ResponseEntity.ok().body(EditoraLivro.values());
+    public EditoraLivro[] getEditora(){
+        return EditoraLivro.values();
     }
     
 }
