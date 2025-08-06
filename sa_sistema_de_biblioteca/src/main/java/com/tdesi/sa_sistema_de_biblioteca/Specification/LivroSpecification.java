@@ -1,8 +1,5 @@
 package com.tdesi.sa_sistema_de_biblioteca.Specification;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.data.jpa.domain.Specification;
 
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
@@ -11,32 +8,35 @@ import jakarta.persistence.criteria.Predicate;
 
 public class LivroSpecification {
 
-    public static Specification<Livro> filtrar(
-        String titulo,
-        String editora,
-        Long idAutor,
-        Long idCategoria
-    ) {
-        return (root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-
+    public static Specification<Livro> filtrar(String titulo, String editora, Long idAutor, String categoria, String sinopse, Integer quantidadeTotal) {
+        return (root, query, builder) -> {
+            Predicate predicate = builder.conjunction();
+    
             if (titulo != null && !titulo.isEmpty()) {
-                predicates.add(cb.like(cb.lower(root.get("titulo")), "%" + titulo.toLowerCase() + "%"));
+                predicate = builder.and(predicate, builder.like(builder.lower(root.get("titulo")), "%" + titulo.toLowerCase() + "%"));
             }
-
+    
             if (editora != null && !editora.isEmpty()) {
-                predicates.add(cb.like(cb.lower(root.get("editora")), "%" + editora.toLowerCase() + "%"));
+                predicate = builder.and(predicate, builder.like(builder.lower(root.get("editora")), "%" + editora.toLowerCase() + "%"));
             }
-
+    
             if (idAutor != null) {
-                predicates.add(cb.equal(root.get("autor").get("id"), idAutor));
+                predicate = builder.and(predicate, builder.equal(root.get("autor").get("id"), idAutor));
             }
-
-            if (idCategoria != null) {
-                predicates.add(cb.equal(root.get("categoriaLivro").get("id"), idCategoria));
+    
+            if (categoria != null && !categoria.isEmpty()) {
+                predicate = builder.and(predicate, builder.like(builder.lower(root.get("categoria")), "%" + categoria.toLowerCase() + "%"));
             }
-
-            return cb.and(predicates.toArray(new Predicate[0]));
+    
+            if (sinopse != null && !sinopse.isEmpty()) {
+                predicate = builder.and(predicate, builder.like(builder.lower(root.get("sinopse")), "%" + sinopse.toLowerCase() + "%"));
+            }
+    
+            if (quantidadeTotal != null) {
+                predicate = builder.and(predicate, builder.greaterThanOrEqualTo(root.get("quantidadeTotal"), quantidadeTotal));
+            }
+    
+            return predicate;
         };
     }
 }

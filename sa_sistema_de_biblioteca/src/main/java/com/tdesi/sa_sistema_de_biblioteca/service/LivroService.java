@@ -47,7 +47,7 @@ public class LivroService {
         return livroRepository.findById(idLivro).get();
     }
 
-    public List<Livro> buscarPorFiltros(String titulo, String editora, Long idAutor, Long idCategoria) {
-        return livroRepository.findAll(LivroSpecification.filtrar(titulo, editora, idAutor, idCategoria));
+    public List<Livro> buscarPorFiltros(String titulo, String editora, Long idAutor, String idCategoria, String sinopse, Integer quantidadeTotal) {
+        return livroRepository.findAll(LivroSpecification.filtrar(titulo, editora, idAutor, idCategoria, sinopse, quantidadeTotal));
     }
 }
