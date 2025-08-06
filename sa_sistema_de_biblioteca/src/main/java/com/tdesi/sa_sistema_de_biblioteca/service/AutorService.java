@@ -13,11 +13,7 @@ public class AutorService {
     @Autowired
     AutorRepository autorRepository;
 
-    @Autowired
-    ImageCompressionService imageCompressionService;
-
     public Autor save(Autor autor){
-        autor.setFotoAutor(imageCompressionService.compressBase64(autor.getFotoAutor()));
         return autorRepository.save(autor);
     }
 
