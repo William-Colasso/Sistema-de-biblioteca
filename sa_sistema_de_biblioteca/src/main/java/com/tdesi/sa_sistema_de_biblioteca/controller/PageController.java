@@ -33,6 +33,11 @@ public class PageController {
         return "cadastroAutor";
     }
 
+    @GetMapping("/categorias")
+    public String getCategoriasPage(){
+        return "categorias";
+    }
+
 
     
 }

@@ -1,42 +1,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     background-image: url("/img/patternLivro.png");
-    margin: 0;
-    padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-content: flex-start;
     align-items: center;
     min-height: 100vh;
     color: #333;
 }
 
+/* =================== CARD FERRAMENTA =================== */
 
-
-.containerLivro {
-    margin-top: 2em;
-    background-color: #fff;
-    max-width: 600px;
-    min-height: 150%;
-    
+.containerCard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: 2.5em;
+    gap: 2em;
+    padding: 2em;
+}
+
+.cardFerramenta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vw;
+    width: 20vw;
+    min-width: 160px;
+    max-width: 220px;
+    border: solid 3px #ccc;
+    border-radius: 30px;
+    color: #005CAA;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cardFerramenta i {
+    transform: scale(5);
+}
+
+.cardFerramenta p {
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+}
+
+.cardFerramenta:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 10px #005CAA55;
+    transform: scale(1.1);
+}
+
+.cardFerramenta:hover p {
+    transform: translateY(120%);
+    opacity: 1;
+}
+
+body:has(.cardFerramenta:hover) .cardFerramenta:not(:hover) {
+    filter: blur(1px);
+}
+
+/* =================== CONTAINER AUTOR =================== */
+
+.containerAutor {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    max-width: 450px;
+    width: 100%;
+    padding: 2em;
+    margin: 2em auto;
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(0, 92, 170, 0.15);
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.8s ease-in-out;
     transition: box-shadow 0.3s ease-in-out;
 }
 
-.containerLivro:hover {
+.containerAutor:hover {
     box-shadow: 0 0 40px rgba(0, 92, 170, 0.25);
 }
 
-.containerLivro h1 {
+.containerAutor h1 {
     text-align: center;
-    margin-bottom: 1.5em;
-    font-size: 2em;
+    margin-bottom: 1.2em;
+    font-size: clamp(1.4em, 2.5vw, 1.8em);
     color: #005CAA;
 }
 
@@ -54,9 +109,9 @@ form label {
 
 form input,
 form textarea {
-    width: 95%;
-    padding: 0.9em;
-    font-size: 1rem;
+    width: 100%;
+    padding: 0.8em;
+    font-size: 0.95rem;
     border: 1px solid #ccc;
     border-radius: 6px;
     background-color: #f9f9f9;
@@ -78,7 +133,7 @@ form textarea {
 form button {
     width: 100%;
     padding: 0.9em;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     background-color: #005CAA;
     color: #fff;
     border: none;
@@ -93,7 +148,47 @@ form button:hover {
     transform: translateY(-2px);
 }
 
-/* Fade-in animation */
+/* Preview da foto do Autor */
+.preview-autor {
+    display: none;
+    max-height: 150px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.preview-autor:hover {
+    transform: scale(1.05);
+}
+
+/* =================== CONTAINER LIVRO =================== */
+
+.containerLivro {
+    margin-top: 2em;
+    background-color: #fff;
+    max-width: 600px;
+    width: 100%;
+    padding: 2.5em;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 92, 170, 0.15);
+    animation: fadeIn 1s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.containerLivro:hover {
+    box-shadow: 0 0 40px rgba(0, 92, 170, 0.25);
+}
+
+.containerLivro h1 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: clamp(1.5em, 2.5vw, 2em);
+    color: #005CAA;
+}
+
+/* =================== Animação =================== */
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -102,5 +197,50 @@ form button:hover {
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* =================== RESPONSIVIDADE =================== */
+
+@media (max-width: 768px) {
+    .containerCard {
+        flex-direction: column;
+        padding: 1em;
+    }
+
+    .cardFerramenta {
+        width: 80vw;
+        height: 40vw;
+    }
+
+    .containerAutor,
+    .containerLivro {
+        padding: 1.5em;
+        max-width: 100%;
+    }
+
+    form input,
+    form textarea {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardFerramenta i {
+        transform: scale(3.5);
+    }
+
+    .cardFerramenta:hover p {
+        transform: translateY(100%);
+    }
+
+    .containerAutor h1,
+    .containerLivro h1 {
+        font-size: 1.4em;
+    }
+
+    form button {
+        font-size: 1rem;
+        padding: 0.8em;
     }
 }

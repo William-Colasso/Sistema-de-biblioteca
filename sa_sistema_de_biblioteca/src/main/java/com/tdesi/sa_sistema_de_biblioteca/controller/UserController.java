@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/libraria")
-    public String getMethodName() {
+    public String getBibliotecario() {
         return "bibliotecario";
     }
     

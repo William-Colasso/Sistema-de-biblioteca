@@ -169,3 +169,83 @@ form{
     align-content: center;
     align-items: center;
 }
+
+
+/* Responsividade para tablets */
+@media (max-width: 1024px) {
+    .containerProfile {
+        width: 70%;
+        min-height: 120vh;
+        border-radius: 3vw;
+    }
+
+    #profilePic,
+    .imgProfile {
+        width: 30vw;
+        height: 30vw;
+    }
+
+    .profileInfo {
+        width: 90%;
+        gap: 4%;
+    }
+
+    .profileInfo button {
+        width: 50%;
+    }
+}
+
+/* Responsividade para celulares */
+@media (max-width: 768px) {
+    html, body {
+        height: auto;
+        overflow-y: auto;
+        padding: 1em;
+    }
+
+    .containerProfile {
+        width: 95%;
+        min-height: auto;
+        padding-bottom: 2em;
+        border-radius: 5vw;
+    }
+
+    #profilePic,
+    .imgProfile {
+        width: 45vw;
+        height: 45vw;
+    }
+
+    .profileInfo {
+        width: 95%;
+        margin: 5%;
+        gap: 3%;
+    }
+
+    .profileInfo label {
+        font-size: 0.95rem;
+    }
+
+    .profileInfo input[type="email"],
+    .profileInfo input[type="tel"],
+    .profileInfo input[type="password"],
+    .profileInfo input[type="text"] {
+        font-size: 0.95rem;
+    }
+
+    .profileInfo button {
+        width: 70%;
+        height: 6vh;
+        font-size: 0.95rem;
+    }
+
+    .imgProfile img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .containerButtons {
+        flex-direction: column;
+        gap: 1em;
+    }
+}

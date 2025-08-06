@@ -1,7 +1,11 @@
-html,body {
+html, body {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   overflow-y: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
 }
 
 .auth-container {
@@ -9,10 +13,12 @@ html,body {
   width: 100%;
   max-width: 400px;
   margin: auto;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1em;
+  box-sizing: border-box;
 }
 
 #chk {
@@ -22,7 +28,7 @@ html,body {
 .signup,
 .login {
   position: absolute;
-  min-height: 75%;
+  height: 100%;
   width: 100%;
   padding: 2em;
   background-color: #005CAA;
@@ -32,42 +38,41 @@ html,body {
   transition: 0.8s ease-in-out;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .signup h1,
 .login h1 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: bold;
   color: white;
   margin-bottom: 1em;
-  display: block;
   cursor: pointer;
   transition: 0.5s ease-in-out;
 }
 
 .signup label,
-.login label
- {
+.login label {
   margin-top: 5%;
   margin-bottom: 5%;
   font-size: 1rem;
   font-weight: bold;
   color: white;
-  margin-bottom: 1em;
   display: block;
   cursor: pointer;
-  transition: .4s ease-in-out;
+  transition: 0.4s ease-in-out;
   padding: 0.5em;
   border: solid 8px transparent;
 }
 
-.signup p{
+.signup p {
   color: whitesmoke;
   text-align: left;
 }
 
 input {
-  width: 80%;
+  width: 100%;
+  max-width: 300px;
   padding: 0.75em;
   margin: 0.5em auto;
   border: none;
@@ -75,10 +80,12 @@ input {
   outline: none;
   background-color: #e0dede;
   display: block;
+  box-sizing: border-box;
 }
 
 button {
-  width: 80%;
+  width: 100%;
+  max-width: 300px;
   padding: 0.75em;
   margin-top: 1em;
   border: none;
@@ -94,7 +101,6 @@ button:hover {
   background-color: #e0e0e0;
 }
 
-/* Transição entre login e signup */
 .login {
   transform: translateY(10);
   z-index: 1;
@@ -106,23 +112,22 @@ button:hover {
   color: #005CAA;
 }
 
-.login label:hover{
-
+.login label:hover {
   border: solid #005CAA 8px;
   border-radius: 5px;
 }
-.signup label:hover{
 
+.signup label:hover {
   border: solid #f5f5f5 8px;
   border-radius: 5px;
 }
 
-#chk:checked~.auth-container .login {
+#chk:checked ~ .auth-container .login {
   transform: translateY(-200%);
   z-index: 0;
 }
 
-#chk:checked~.auth-container .signup {
+#chk:checked ~ .auth-container .signup {
   transform: translateY(0%);
   z-index: 1;
 }
@@ -132,31 +137,27 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  align-content: center;
 }
 
-.right-side, .left-side {
+.right-side,
+.left-side {
   width: 50%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  align-content: center;
 }
-.left-side::before{
+
+.left-side::before {
   position: relative;
   content: "";
   background: linear-gradient(0.25turn, #f5f5f5, #f5f5f5);
   z-index: 1;
   width: 100%;
-
-
-
 }
 
-
-.right-side::before{
+.right-side::before {
   border: 10px #005CAA solid;
   position: absolute;
   content: "";
@@ -168,18 +169,15 @@ form {
   filter: blur(1px);
 }
 
-
-
-
 :root {
-  --duration: 30s; /* Aumentando a duração da animação */
+  --duration: 30s;
   --color-1: black;
   --color-2: #024f92;
   --color-3: #065fad;
   --color-4: rgb(0, 92, 170);
-  --color-5:  #077ee6;
-  --color-6:  #0482f0;
-  --color-white: #ffffff; /* Cor branca */
+  --color-5: #077ee6;
+  --color-6: #0482f0;
+  --color-white: #ffffff;
 }
 
 .senaiLogo svg path {
@@ -187,15 +185,14 @@ form {
   stroke-dasharray: 10 5;
   stroke-dashoffset: 70;
   fill-opacity: 1;
-  stroke: var(--color-6); /* Cor inicial */
+  stroke: var(--color-6);
   stroke-opacity: 1;
   animation: boxAnimation var(--duration) ease-in-out infinite;
-  transition: .1s ease-in-out;
-  stroke-opacity: .5;
+  transition: 0.1s ease-in-out;
+  stroke-opacity: 0.5;
 }
 
-.senaiLogo svg{
-  
+.senaiLogo svg {
   top: 500%;
 }
 
@@ -204,59 +201,87 @@ form {
     stroke-dasharray: 10 5;
     stroke-dashoffset: 70;
     stroke-width: 8;
-    stroke: var(--color-1); /* Cor 1 */
+    stroke: var(--color-1);
   }
-  10% {
-    stroke: var(--color-2); /* Transição suave para Cor 2 */
-  }
-  20% {
-    stroke: var(--color-3); /* Transição para Cor 3 */
-  }
-  30% {
-    stroke: var(--color-4); /* Transição para Cor 4 */
-  }
-  40% {
-    stroke: var(--color-5); /* Transição para Cor 5 */
-  }
+  10% { stroke: var(--color-2); }
+  20% { stroke: var(--color-3); }
+  30% { stroke: var(--color-4); }
+  40% { stroke: var(--color-5); }
   50% {
     stroke-dasharray: 40 14;
     stroke-dashoffset: 35;
     stroke-width: 8;
-    stroke: var(--color-6); /* Cor 6 */
+    stroke: var(--color-6);
   }
-  60% {
-    stroke: var(--color-white); /* Cor branca */
-  }
-  70% {
-    stroke: var(--color-1); /* Retorno para Cor 1 */
-  }
-  80% {
-    stroke: var(--color-2); /* Transição suave para Cor 2 */
-  }
-  90% {
-    stroke: var(--color-3); /* Transição para Cor 3 */
-  }
+  60% { stroke: var(--color-white); }
+  70% { stroke: var(--color-1); }
+  80% { stroke: var(--color-2); }
+  90% { stroke: var(--color-3); }
   100% {
     stroke-dasharray: 10 5;
     stroke-dashoffset: 70;
     stroke-width: 8;
-    stroke: var(--color-4); /* Cor final, retorna para uma cor desejada */
+    stroke: var(--color-4);
   }
 }
 
-
-i{
+i {
   position: absolute;
-  scale: 7;
+  transform: scale(1);
   display: flex;
   align-self: flex-start;
   left: 5%;
   top: 7%;
   color: #005CAA;
+  transition: transform 0.3s ease;
 }
 
-i:hover{
-  scale: 8;
+i:hover {
+  transform: scale(1.15);
   cursor: pointer;
   filter: contrast(100);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+  html, body {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .right-side,
+  .left-side {
+    width: 100%;
+    min-height: auto;
+    padding: 1em;
+  }
+
+  .right-side::before,
+  .left-side::before {
+    width: 100%;
+    height: auto;
+    border: none;
+  }
+
+  .auth-container {
+    max-width: 100%;
+    padding: 1em;
+  }
+
+  .signup,
+  .login {
+    padding: 1em;
+  }
+
+  input,
+  button {
+    width: 90%;
+  }
+
+  i {
+    left: 2%;
+    top: 2%;
+    font-size: 1.5rem;
+  }
 }

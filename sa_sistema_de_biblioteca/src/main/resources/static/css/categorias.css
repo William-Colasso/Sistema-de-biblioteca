@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("/img/patternLivro.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+
+@keyframes boxShadow {
+    0% {
+        box-shadow: 10px 10px 100px 10px #f5f5f5;
+    }
+
+    50% {
+        box-shadow: 10px 10px 100px 10px #0000ffa9;
+    }
+
+    100% {
+        box-shadow: 10px 10px 100px 10px #f5f5f5;
+    }
+
+}
+
+
+
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    body {
+        padding: 1em;
+    }
+}
+
+.containerCategorias {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 2em;
+    gap: 1.5em;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+  }
+  
+  .cardCategoria {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: clamp(180px, 25vw, 240px);
+    width: clamp(180px, 25vw, 240px);
+    border: solid 3px #ccc;
+    border-radius: 30px;
+    color: #005CAA;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 1em;
+  }
+  
+  .cardCategoria i {
+    font-size: clamp(2rem, 5vw, 4rem);
+    transition: transform 0.3s ease;
+  }
+  
+  .cardCategoria p {
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .cardCategoria:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 10px #005CAA55;
+    transform: scale(1.05);
+    animation: boxShadow 10s infinite;
+
+  }
+  
+  .cardCategoria:hover p {
+    transform: translateY(30%);
+    opacity: 1;
+  }
+  
+  body:has(.cardCategoria:hover) .cardCategoria:not(:hover) {
+    filter: blur(1px);
+  }
+  
+  /* RESPONSIVO: telas menores que 768px */
+  @media (max-width: 768px) {
+    .containerCategorias {
+      flex-direction: column;
+      padding: 1em;
+    }
+  
+    .cardCategoria {
+      width: 80%;
+      height: auto;
+      padding: 1.5em;
+    }
+  
+    .cardCategoria i {
+      font-size: 3rem;
+    }
+  
+    .cardCategoria p {
+      transform: none;
+      opacity: 1;
+      margin-top: 1em;
+    }
+  
+    body:has(.cardCategoria:hover) .cardCategoria:not(:hover) {
+      filter: none;
+    }
+  }
+  

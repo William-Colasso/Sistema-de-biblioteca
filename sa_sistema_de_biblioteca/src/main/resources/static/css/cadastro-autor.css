@@ -1,27 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     background-image: url("/img/patternLivro.png");
-
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     margin: 0;
-
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    align-content: center;
     min-height: 100vh;
     color: #333;
 }
 
 .containerAutor {
     display: flex;
-    align-self: center;
     flex-direction: column;
     background-color: #fff;
-    max-width: 450px;
     width: 100%;
+    max-width: 450px;
     padding: 2em;
     margin: auto;
     border-radius: 15px;
@@ -37,7 +40,7 @@ body {
 .containerAutor h1 {
     text-align: center;
     margin-bottom: 1.2em;
-    font-size: 1.8em;
+    font-size: clamp(1.5rem, 4vw, 2rem);
     color: #005CAA;
 }
 
@@ -45,6 +48,7 @@ form {
     display: flex;
     flex-direction: column;
     gap: 1.2em;
+    width: 100%;
 }
 
 form label {
@@ -54,7 +58,7 @@ form label {
 }
 
 form input {
-    width: 90%;
+    width: 100%;
     padding: 0.8em;
     font-size: 0.95rem;
     border: 1px solid #ccc;
