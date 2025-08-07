@@ -180,6 +180,12 @@ button.secondary:hover {
 }
 
 .containerLivros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  position: relative;
   width: 100%;
   height: 100%;
   grid-column: 20/101;
@@ -188,6 +194,34 @@ button.secondary:hover {
   background-color: #005CAA;
   z-index: 5;
   box-sizing: border-box;
+}
+
+
+.cardLivro{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: clamp(180px, 25vw, 240px);
+  width: clamp(180px, 25vw, 240px);
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  color: #005CAA;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 1em;
+  background-color: #f5f5f5;
+}
+.cardLivro:hover{
+ margin: 1em;
+  border: 3px solid #005CAA;
+  cursor: pointer;
+  box-shadow: 0px 0px 30px 10px whitesmoke;
+}
+
+.cardLivro img{
+  height: 80%;
+  
 }
 
 /* RESPONSIVO */

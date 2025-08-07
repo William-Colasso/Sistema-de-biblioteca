@@ -1,5 +1,7 @@
 package com.tdesi.sa_sistema_de_biblioteca.Specification;
 
+import java.sql.Date;
+
 import org.springframework.data.jpa.domain.Specification;
 
 import com.tdesi.sa_sistema_de_biblioteca.model.CategoriaLivro;
@@ -10,7 +12,7 @@ import jakarta.persistence.criteria.Predicate;
 
 public class LivroSpecification {
 
-    public static Specification<Livro> filtrar(String titulo, String editora, Long idAutor, String categoria,
+    public static Specification<Livro> filtrar(String titulo, String editora, Date dataPublicacao, Long idAutor, String categoria,
             String sinopse, Integer quantidadeTotal) {
         return (root, query, builder) -> {
             Predicate predicate = builder.conjunction();
@@ -29,14 +31,18 @@ public class LivroSpecification {
                 }
             }
 
+            if (dataPublicacao != null) {
+                predicate = builder.and(predicate, builder.greaterThanOrEqualTo(root.get("dataPublicacao"), dataPublicacao));
+            }
+
             if (idAutor != null) {
-                predicate = builder.and(predicate, builder.equal(root.get("autor").get("id"), idAutor));
+                predicate = builder.and(predicate, builder.equal(root.get("autor"), idAutor));
             }
 
             if (categoria != null && !categoria.isEmpty()) {
                 try {
                     CategoriaLivro categoriaEnum = CategoriaLivro.valueOf(categoria.toUpperCase());
-                    predicate = builder.and(predicate, builder.equal(root.get("categoria"), categoriaEnum));
+                    predicate = builder.and(predicate, builder.equal(root.get("categoriaLivro"), categoriaEnum));
                 } catch (IllegalArgumentException e) {
                     
                 }
@@ -50,7 +56,7 @@ public class LivroSpecification {
                 predicate = builder.and(predicate,
                         builder.greaterThanOrEqualTo(root.get("quantidadeTotal"), quantidadeTotal));
             }
-
+            System.out.println(predicate);
             return predicate;
         };
     }

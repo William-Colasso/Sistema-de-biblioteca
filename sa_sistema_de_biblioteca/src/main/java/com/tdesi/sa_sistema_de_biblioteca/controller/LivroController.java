@@ -1,5 +1,6 @@
 package com.tdesi.sa_sistema_de_biblioteca.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,13 @@ public class LivroController {
     public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
         @RequestParam(required = false) String titulo,
         @RequestParam(required = false) String editora,
+        @RequestParam(required = false) Date dataPublicacao,
         @RequestParam(required = false) Long idAutor,
-        @RequestParam(required = false) String Categoria,
+        @RequestParam(required = false) String categoria,
         @RequestParam(required = false) String sinopse,
         @RequestParam(required = false) Integer quantidadeTotal
     ) {
-        List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, idAutor, Categoria, sinopse, quantidadeTotal);
+        List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, dataPublicacao, idAutor, categoria, sinopse, quantidadeTotal);
         return ResponseEntity.ok(livros);
     }
     @PostMapping("/register")

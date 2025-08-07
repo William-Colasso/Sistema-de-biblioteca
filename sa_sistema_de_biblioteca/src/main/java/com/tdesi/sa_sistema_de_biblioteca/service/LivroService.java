@@ -1,5 +1,6 @@
 package com.tdesi.sa_sistema_de_biblioteca.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class LivroService {
         return livroRepository.findById(idLivro).get();
     }
 
-    public List<Livro> buscarPorFiltros(String titulo, String editora, Long idAutor, String idCategoria, String sinopse, Integer quantidadeTotal) {
-        return livroRepository.findAll(LivroSpecification.filtrar(titulo, editora, idAutor, idCategoria, sinopse, quantidadeTotal));
+    public List<Livro> buscarPorFiltros(String titulo, String editora, Date dataPublicacao, Long idAutor, String idCategoria, String sinopse, Integer quantidadeTotal) {
+        return livroRepository.findAll(LivroSpecification.filtrar(titulo, editora, dataPublicacao, idAutor, idCategoria, sinopse, quantidadeTotal));
     }
 }
