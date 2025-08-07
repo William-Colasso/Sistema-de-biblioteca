@@ -162,6 +162,30 @@ async function search() {
 
     })
   }
+
+  if (Array.isArray(arrayBooks)) {
+    const containerLivros = document.getElementById("containerLivros")
+    containerLivros.innerHTML = ""
+    arrayBooks.forEach((livro) => {
+      let div = document.createElement("div")
+      let img = document.createElement("img")
+      let p = document.createElement("p")
+      div.setAttribute("class", "cardLivro")
+      if (String(livro.imagemCapa).includes("http")) {
+
+        img.setAttribute("src", `${livro.imagemCapa}`)
+      } else {
+
+        img.setAttribute("src", `data:image/png;base64,${livro.imagemCapa}`)
+      }
+      p.innerText = `${livro.titulo}`
+
+      div.appendChild(img)
+      div.appendChild(p)
+      containerLivros.appendChild(div)
+
+    })
+  }
   console.log(arrayBooks)
 
 
