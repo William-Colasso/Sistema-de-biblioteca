@@ -36,7 +36,7 @@ public class LivroSpecification {
             }
 
             if (idAutor != null) {
-                predicate = builder.and(predicate, builder.equal(root.get("autor"), idAutor));
+                predicate = builder.and(predicate, builder.equal(root.get("autor").get("idAutor"), idAutor));
             }
 
             if (categoria != null && !categoria.isEmpty()) {

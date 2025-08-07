@@ -18,7 +18,7 @@ function setArguments(tituloLivro, editora, anoPublicacao, sinopse, categoriaLiv
 
     tituloLivro: String(tituloLivro).trim() == "" ? null : String(tituloLivro).replaceAll(" ", "%20"),
     editora: String(editora).trim() == "null" ? null : editora,
-    anoPublicacao: ((String(anoPublicacao).trim() == "null") || (String(anoPublicacao).trim() == ""))  ? null : anoPublicacao,
+    anoPublicacao: ((String(anoPublicacao).trim() == "null") || (String(anoPublicacao).trim() == "")) ? null : anoPublicacao,
     sinopse: String(sinopse).trim() == "" ? null : sinopse,
     categoriaLivro: String(categoriaLivro).trim() == "null" ? null : categoriaLivro,
     autor: String(autor).trim() == "null" ? null : autor,
@@ -59,8 +59,8 @@ function getFilters() {
 
 }
 
-function verificaCondicoes(url){
-  if(url.includes("=")){
+function verificaCondicoes(url) {
+  if (url.includes("=")) {
     return true;
   }
   return false;
@@ -77,52 +77,59 @@ async function search() {
       ARGUMENTS_API.tituloLivro
   }
   if (ARGUMENTS_API.anoPublicacao != null) {
-    if(verificaCondicoes(URL)){
+    if (verificaCondicoes(URL)) {
       URL += "&dataPublicacao=" +
-      ARGUMENTS_API.anoPublicacao
+        ARGUMENTS_API.anoPublicacao
+    } else {
+      URL += "dataPublicacao=" +
+        ARGUMENTS_API.editora
     }
-    URL += "dataPublicacao=" +
-      ARGUMENTS_API.editora
+
   }
   if (ARGUMENTS_API.editora != null) {
-    if(verificaCondicoes(URL)){
+    if (verificaCondicoes(URL)) {
       URL += "&editora=" +
-      ARGUMENTS_API.editora
+        ARGUMENTS_API.editora
+    } else {
+      URL += "editora=" +
+        ARGUMENTS_API.editora
     }
-    URL += "editora=" +
-      ARGUMENTS_API.editora
   }
   if (ARGUMENTS_API.autor != null) {
-    if(verificaCondicoes(URL)){
+    if (verificaCondicoes(URL)) {
       URL += "&idAutor=" +
-      ARGUMENTS_API.autor
+        ARGUMENTS_API.autor
+    } else {
+      URL += "idAutor=" +
+        ARGUMENTS_API.autor
     }
-    URL += "idAutor=" +
-    ARGUMENTS_API.autor
   }
   if (ARGUMENTS_API.categoriaLivro != null) {
-    if(verificaCondicoes(URL)){
+    if (verificaCondicoes(URL)) {
       URL += "&categoria=" +
-      ARGUMENTS_API.categoriaLivro
+        ARGUMENTS_API.categoriaLivro
+    } else {
+      URL += "categoria=" +
+        ARGUMENTS_API.categoriaLivro
     }
-    URL += "categoria=" +
-    ARGUMENTS_API.categoriaLivro
   }
   if (ARGUMENTS_API.sinopse != null) {
-    if(verificaCondicoes(URL)){
+    if (verificaCondicoes(URL)) {
       URL += "&sinopse=" +
-      ARGUMENTS_API.sinopse
+        ARGUMENTS_API.sinopse
+    } else {
+      URL += "sinopse=" +
+        ARGUMENTS_API.sinopse
     }
-    URL += "sinopse=" +
-    ARGUMENTS_API.sinopse
   }
   if (ARGUMENTS_API.quantidadeTotal != null) {
-    if(verificaCondicoes(URL)){
+    if (verificaCondicoes(URL)) {
       URL += "&quantidadeTotal=" +
-      ARGUMENTS_API.quantidadeTotal
+        ARGUMENTS_API.quantidadeTotal
+    } else {
+      URL += "quantidadeTotal=" +
+        ARGUMENTS_API.quantidadeTotal
     }
-    URL += "quantidadeTotal=" +
-    ARGUMENTS_API.quantidadeTotal
   }
 
 

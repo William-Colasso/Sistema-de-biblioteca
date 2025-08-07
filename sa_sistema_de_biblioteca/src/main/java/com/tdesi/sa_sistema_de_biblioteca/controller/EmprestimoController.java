@@ -38,7 +38,7 @@ public class EmprestimoController {
     UserService userService;
     
     @PostMapping("/create")
-    public ResponseEntity<Emprestimo> postMethodName(@RequestBody Emprestimo emprestimo) {
+    public ResponseEntity<Emprestimo> createEmprestimo(@RequestBody Emprestimo emprestimo) {
         Emprestimo save = emprestimoService.save(emprestimo);
         return ResponseEntity.status(HttpStatus.CREATED).body(save);
     }
@@ -89,8 +89,8 @@ public class EmprestimoController {
             }
         });
         
-        Emprestimo att = emprestimoService.save(emprestimo);    
-        return ResponseEntity.ok(att);
+        Emprestimo emprestimoAtt = emprestimoService.save(emprestimo);    
+        return ResponseEntity.ok(emprestimoAtt);
     }
 
 }
