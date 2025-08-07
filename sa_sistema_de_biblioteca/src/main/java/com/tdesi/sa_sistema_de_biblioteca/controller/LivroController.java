@@ -30,17 +30,17 @@ public class LivroController {
     }
 
     @GetMapping("/buscar")
-public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
-    @RequestParam(required = false) String titulo,
-    @RequestParam(required = false) String editora,
-    @RequestParam(required = false) Long idAutor,
-    @RequestParam(required = false) String Categoria,
-    @RequestParam(required = false) String sinopse,
-    @RequestParam(required = false) Integer quantidadeTotal
-) {
-    List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, idAutor, Categoria, sinopse, quantidadeTotal);
-    return ResponseEntity.ok(livros);
-}
+    public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
+        @RequestParam(required = false) String titulo,
+        @RequestParam(required = false) String editora,
+        @RequestParam(required = false) Long idAutor,
+        @RequestParam(required = false) String Categoria,
+        @RequestParam(required = false) String sinopse,
+        @RequestParam(required = false) Integer quantidadeTotal
+    ) {
+        List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, idAutor, Categoria, sinopse, quantidadeTotal);
+        return ResponseEntity.ok(livros);
+    }
     @PostMapping("/register")
     public ResponseEntity<Livro> createBook(@RequestBody Livro livro) {
         Livro save = livroService.save(livro);
