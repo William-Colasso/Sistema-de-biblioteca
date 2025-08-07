@@ -16,8 +16,6 @@ import com.tdesi.sa_sistema_de_biblioteca.service.LivroService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
 @RequestMapping("/book")
 public class LivroController {
@@ -30,17 +28,18 @@ public class LivroController {
     }
 
     @GetMapping("/buscar")
-public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
-    @RequestParam(required = false) String titulo,
-    @RequestParam(required = false) String editora,
-    @RequestParam(required = false) Long idAutor,
-    @RequestParam(required = false) String categoria,
-    @RequestParam(required = false) String sinopse,
-    @RequestParam(required = false) Integer quantidadeTotal
-) {
-    List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, idAutor, categoria, sinopse, quantidadeTotal);
-    return ResponseEntity.ok(livros);
-}
+    public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String editora,
+            @RequestParam(required = false) Long idAutor,
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false) String sinopse,
+            @RequestParam(required = false) Integer quantidadeTotal) {
+        List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, idAutor, categoria, sinopse,
+                quantidadeTotal);
+        return ResponseEntity.ok(livros);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<Livro> createBook(@RequestBody Livro livro) {
         Livro save = livroService.save(livro);
@@ -53,13 +52,8 @@ public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
     }
 
     @GetMapping("/editoras")
-    public EditoraLivro[] getEditora(){
+    public EditoraLivro[] getEditora() {
         return EditoraLivro.values();
     }
-    
+
 }
-
-    
-
-    
-    
