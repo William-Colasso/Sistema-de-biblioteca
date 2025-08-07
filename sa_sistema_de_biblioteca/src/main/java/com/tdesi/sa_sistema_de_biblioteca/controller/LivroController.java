@@ -34,11 +34,11 @@ public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
     @RequestParam(required = false) String titulo,
     @RequestParam(required = false) String editora,
     @RequestParam(required = false) Long idAutor,
-    @RequestParam(required = false) String Categoria,
+    @RequestParam(required = false) String categoria,
     @RequestParam(required = false) String sinopse,
     @RequestParam(required = false) Integer quantidadeTotal
 ) {
-    List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, idAutor, Categoria, sinopse, quantidadeTotal);
+    List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, idAutor, categoria, sinopse, quantidadeTotal);
     return ResponseEntity.ok(livros);
 }
     @PostMapping("/register")

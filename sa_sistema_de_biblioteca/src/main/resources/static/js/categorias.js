@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     const response = await fetch("/categoria", { method: "GET" });
     if (!response.ok) throw new Error("Erro ao buscar autores.");
   
-    const categorias = await response.json();
+    const categorias = await response.json();   
 
     categorias.forEach((categoria) => {
         let div = document.createElement("div")

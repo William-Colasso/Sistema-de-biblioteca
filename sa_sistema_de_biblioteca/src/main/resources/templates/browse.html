@@ -1,111 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/cadastro-livro.css" />
-    <link rel="stylesheet" href="/css/geral.css" />
-    <link rel="stylesheet" href="/css/browse.css" />
-    <link
-      rel="shortcut icon"
-      href="https://estudante.sesisenai.org.br/img/favicon.ico"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <title>Acervo</title>
-  </head>
 
-  <body>
-    <header>
-      <div id="logoDiv">
-        <img
-          src="/img/senai-logo.png"
-          onclick="window.location ='/home'"
-          alt="Imagem logotipo do SENAI de Santa Catarina"
-        />
-        <p>Sistemas de bibliotecas SENAI</p>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/cadastro-livro.css" />
+  <link rel="stylesheet" href="/css/geral.css" />
+  <link rel="stylesheet" href="/css/browse.css" />
+  <link rel="shortcut icon" href="https://estudante.sesisenai.org.br/img/favicon.ico" />
+  <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <title>Acervo</title>
+</head>
 
-      <nav>
-        <a href="/home">Home <i class="fa-solid fa-house"></i> </a>
-        <a id="account" href="/user/account"
-          >Crie sua conta/Ver perfil <i class="fa-solid fa-user"></i
-        ></a>
-        <a href="/browse">Nosso acervo <i class="fa-solid fa-book"></i></a>
-        <a href="/categorias"
-          >Categorias <i class="fa-regular fa-bookmark"></i>
-        </a>
-        <a id="lastItemNav" href="/user/libraria"
-          >Seção bibliotecário <i class="fa-solid fa-user-secret"></i
-        ></a>
-      </nav>
-
-      <div id="header-actions">
-        <input type="text" placeholder="Buscar livros..." />
-        <button><i class="fas fa-search"></i></button>
-      </div>
-    </header>
-
-    <div class="containerBrowse">
-      <div class="containerFiltro">
-        <label for="editora">Editora:</label>
-        <select name="editora" id="editora"></select>
-
-        <label for="anoPublicacao">Publicação apartir de:</label>
-        <input type="date" id="anoPublicacao" name="anoPublicacao" required />
-
-        <label for="sinopse">Sinopse contém:</label>
-        <input type="text" id="sinopse" name="sinopse" />
-
-        <label for="categoriaLivro">Categoria:</label>
-        <select name="categoriaLivro" id="categoriaLivro"></select>
-
-        <label for="autor">Autor:</label>
-        <select
-          name="autor"
-          id="autor"
-          placeholder="Selecione um autor..."
-        ></select>
-
-        <label for="quantidadeTotal" id="quantidadeTotalText">Quantidade mínima de exemplares: --</label>
-        <input
-          min="1"
-          type="range"
-          step="9"
-          name="quantidadeTotal"
-          value="1"
-          id="quantidadeTotal"
-        />
-
-
-        <button class="secondary" onclick="cleanFilters()">Limpar filtros <i class="fa-solid fa-broom"></i></button>
-        <button onclick="search(getFilters())">Pesquisar<i class="fa-solid fa-magnifying-glass"></i></button>
-      </div>
-      <div class="containerOrdenacao">
-
-        <label for="tituloLivro">Titulo da obra:</label>
-        <input placeholder="Harry Potter, Maquiavel, Eletricidade básica" type="text" name="tituloLivro" id="tituloLivro">
-
-        <button onclick="search()">Pesquisar<i class="fa-solid fa-magnifying-glass"></i></button>
-      </div>
-      <div class="containerLivros">
-
-
-        <div class="containerPages">
-
-        </div>
-      </div>
+<body>
+  <header>
+    <div id="logoDiv">
+      <img src="/img/senai-logo.png" onclick="window.location ='/home'"
+        alt="Imagem logotipo do SENAI de Santa Catarina" />
+      <p>Sistemas de bibliotecas SENAI</p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+    <nav>
+      <a href="/home">Home <i class="fa-solid fa-house"></i> </a>
+      <a id="account" href="/user/account">Crie sua conta/Ver perfil <i class="fa-solid fa-user"></i></a>
+      <a href="/browse">Nosso acervo <i class="fa-solid fa-book"></i></a>
+      <a href="/categorias">Categorias <i class="fa-regular fa-bookmark"></i>
+      </a>
+      <a id="lastItemNav" href="/user/libraria">Seção bibliotecário <i class="fa-solid fa-user-secret"></i></a>
+    </nav>
 
-    <script src="/js/browse.js"></script>
-    <script src="/js/geral.js"></script>
-  </body>
+    <div id="header-actions">
+      <input type="text" placeholder="Buscar livros..." />
+      <button><i class="fas fa-search"></i></button>
+    </div>
+  </header>
+
+  <div class="containerBrowse">
+    <div class="containerFiltro">
+      <label for="editora">Editora:</label>
+      <select name="editora" id="editora">
+        <option value="null">SELECIONE</option>
+
+      </select>
+
+      <label for="anoPublicacao">Publicação apartir de:</label>
+      <input type="date" id="anoPublicacao" name="anoPublicacao" required />
+
+      <label for="sinopse">Sinopse contém:</label>
+      <input type="text" id="sinopse" name="sinopse" />
+
+      <label for="categoriaLivro">Categoria:</label>
+      <select name="categoriaLivro" id="categoriaLivro">
+        <option value="null">SELECIONE</option>
+      </select>
+
+      <label for="autor">Autor:</label>
+      <select name="autor" id="autor" placeholder="Selecione um autor...">
+        <option value="null">SELECIONE</option>
+
+      </select>
+
+      <label for="quantidadeTotal" id="quantidadeTotalText">Quantidade mínima de exemplares: --</label>
+      <input min="1" type="range" step="9" name="quantidadeTotal" value="1" id="quantidadeTotal" />
+
+
+      <button class="secondary" onclick="cleanFilters()">Limpar filtros <i class="fa-solid fa-broom"></i></button>
+      <button onclick="search()">Pesquisar<i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div class="containerOrdenacao">
+
+      <label for="tituloLivro">Titulo da obra:</label>
+      <input placeholder="Harry Potter, Maquiavel, Eletricidade básica" type="text" name="tituloLivro" id="tituloLivro">
+
+      <button onclick="search()">Pesquisar<i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div id="containerLivros" class="containerLivros">
+
+
+      <div class="containerPages">
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+
+  <script src="/js/browse.js"></script>
+  <script src="/js/geral.js"></script>
+</body>
+
 </html>

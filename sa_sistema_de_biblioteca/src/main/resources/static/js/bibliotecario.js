@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   bookC.addEventListener("click", () => {
-    window.location = "/cadastrarLivro";
+    window.location = "/cadastroLivro";
   });
 
   emprestimoC.addEventListener("click", ()=>{window.location="/emprestimo/register"})

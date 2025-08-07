@@ -67,10 +67,18 @@ async function preencherAutores() {
       const option = document.createElement("option");
       option.value = autor.idAutor;
       option.textContent = autor.nomeAutor;
-      option.setAttribute(
-        "data-img",
-        `data:image/png;base64,${autor.fotoAutor}`
-      );
+      if (String(autor.fotoAutor).includes("http")) {
+        option.setAttribute(
+          "data-img",
+          `${autor.fotoAutor}`
+        );
+      } else {
+        option.setAttribute(
+          "data-img",
+          `data:image/png;base64,${autor.fotoAutor}`
+        );
+      }
+
       select.appendChild(option);
     });
 
