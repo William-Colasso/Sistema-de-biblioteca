@@ -39,5 +39,10 @@ public class PageController {
     }
 
 
+    @GetMapping("/emprestimo/register")
+    public String getRegisterEmprestimo(){
+        return "emprestimo";
+    }
+
     
 }

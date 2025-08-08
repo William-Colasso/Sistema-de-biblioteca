@@ -10,6 +10,14 @@ document.addEventListener("DOMContentLoaded", async ()=>{
         let div = document.createElement("div")
         div.setAttribute("class", "cardCategoria")
         div.innerHTML = `<p>${categoria}</p>`
+
+
+        div.addEventListener("click", ()=>{
+            localStorage.setItem("categoria", categoria)
+            window.location = "/browse"
+        })
+
+
         containerCards.appendChild(div)
     });
 })

@@ -12,25 +12,51 @@ let ARGUMENTS_API = {
 };
 
 
-function setArguments(tituloLivro, editora, anoPublicacao, sinopse, categoriaLivro, autor, quantidadeTotal) {
+function setArguments({ tituloLivro, editora, anoPublicacao, sinopse, categoriaLivro, autor, quantidadeTotal }) {
   ARGUMENTS_API = {
 
 
-    tituloLivro: String(tituloLivro).trim() == "" ? null : String(tituloLivro).replaceAll(" ", "%20"),
-    editora: String(editora).trim() == "null" ? null : editora,
-    anoPublicacao: ((String(anoPublicacao).trim() == "null") || (String(anoPublicacao).trim() == "")) ? null : anoPublicacao,
-    sinopse: String(sinopse).trim() == "" ? null : sinopse,
-    categoriaLivro: String(categoriaLivro).trim() == "null" ? null : categoriaLivro,
-    autor: String(autor).trim() == "null" ? null : autor,
-    quantidadeTotal: quantidadeTotal == 1 ? null : quantidadeTotal,
+    tituloLivro: checkArgument(tituloLivro),
+    editora: checkArgument(editora),
+    anoPublicacao: checkArgument(anoPublicacao),
+    sinopse: checkArgument(sinopse),
+    categoriaLivro: checkArgument(categoriaLivro),
+    autor: checkArgument(autor),
+    quantidadeTotal: checkArgument(quantidadeTotal),
   };
+
+  function checkArgument(argument) {
+    if (String(argument).trim() == "" || String(argument).trim() == "null" || argument == 1 || argument == undefined) {
+      return null
+    } else {
+      return String(argument).replaceAll(" ", "%20")
+    }
+  }
 }
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
+
+
+  let categoria = localStorage.getItem("categoria")
+  console.log("Categoria: "+categoria)
+  if (categoria == "null") {
+    
+    search(true)
+
+  }else{
+    setArguments({tituloLivro:"", categoriaLivro: categoria })
+    search(false)
+
+    localStorage.setItem("categoria", "null")
+  }
+  
+
+  
   preencherAutores();
   preencherCategorias();
   preencherEditoras();
-
   refreshFilters();
 });
 
@@ -54,7 +80,7 @@ function getFilters() {
 
 
 
-  setArguments(tituloLivro, editora, anoPublicacao, sinopse, categoriaLivro, autor, quantidadeTotal)
+  setArguments({ tituloLivro: tituloLivro, editora: editora, anoPublicacao: anoPublicacao, sinopse: sinopse, categoriaLivro: categoriaLivro, autor: autor, quantidadeTotal: quantidadeTotal })
 
 
 }
@@ -66,9 +92,11 @@ function verificaCondicoes(url) {
   return false;
 }
 
-async function search() {
-  getFilters()
-
+async function search(isFilterMode) {
+  
+  if(isFilterMode){
+    getFilters()
+  }
 
   console.log("Argumentos para a API: " + JSON.stringify(ARGUMENTS_API))
   let URL = "/book/buscar?"
