@@ -100,4 +100,8 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
+
 }

@@ -1,4 +1,8 @@
-
+ALTER DATABASE sistemaBiblioteca CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `autor` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `emprestimo` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `livro` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE `user` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- Inserção de autores
 INSERT INTO autor (id_autor, nome_autor, foto_autor) VALUES
 (1, 'Machado de Assis', NULL),

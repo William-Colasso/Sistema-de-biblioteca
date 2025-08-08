@@ -1,5 +1,7 @@
 package com.tdesi.sa_sistema_de_biblioteca.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,12 @@ public class UserController {
     public String getAccount() {
         return "account";
     }
+
+    @GetMapping("")
+    public ResponseEntity<List<User>> getUsers() {
+        return ResponseEntity.ok(userService.findAll());
+    }
+    
 
     @GetMapping("/get")
     public ResponseEntity<User> getUser(@RequestParam Long idUser) {
