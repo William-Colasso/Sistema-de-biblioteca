@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     preencherLivros()
+    preencherUsuarios()
 })
 
 async function preencherLivros() {
@@ -86,12 +87,12 @@ async function preencherUsuarios() {
             if (String(user.imagemCapa).includes("http")) {
                 option.setAttribute(
                     "data-img",
-                    `${user.imagemCapa}`
+                    `${"https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"}`
                 );
             } else {
                 option.setAttribute(
                     "data-img",
-                    `data:image/png;base64,${user.imagemCapa}`
+                    `${"https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"}`
                 );
             }
 
@@ -137,3 +138,50 @@ async function preencherUsuarios() {
         console.error("Erro ao buscar livros:", error);
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formEmprestimo");
+  
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+  
+      const userId = document.getElementById("user").value;
+      const livroId = document.getElementById("livro").value;
+      const dataEmprestimo = document.getElementById("dataEmprestimo").value;
+      const dataDevolucaoPrevista = document.getElementById("dataDevolucaoPrevista").value;
+      const devolvido = document.getElementById("devolvido").value === "true";
+  
+      if (!userId || !livroId || !dataEmprestimo || !dataDevolucaoPrevista) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return;
+      }
+  
+      const emprestimo = {
+        user: { idUser: Number(userId) },
+        livro: { idLivro: Number(livroId) },
+        dataEmprestimo,
+        dataDevolucaoPrevista,
+        devolvido
+      };
+  
+      try {
+        const response = await fetch("/loan/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(emprestimo),
+        });
+  
+        if (response.ok) {
+          alert("Empréstimo cadastrado com sucesso!");
+          form.reset();
+        } else {
+          const errorData = await response.json();
+          alert("Erro ao cadastrar empréstimo: " + (errorData.message || response.statusText));
+        }
+      } catch (error) {
+        alert("Erro na requisição: " + error.message);
+        console.error(error);
+      }
+    });
+  });
+  

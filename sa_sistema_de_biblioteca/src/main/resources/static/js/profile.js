@@ -117,3 +117,9 @@
                 input.disabled = !input.disabled
             })
         }
+
+
+        function logOut(){
+            localStorage.clear()
+            window.location.reload()
+        }
