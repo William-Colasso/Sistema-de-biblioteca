@@ -1,9 +1,21 @@
 let tomSelectInstance;
-
+searchByHeader();
 aLogged();
 function isLogged() {
   return !Number.isNaN(Number.parseInt(localStorage.getItem("idUser")));
 }
+
+document.getElementById("lastItemNav").addEventListener("click", (ev)=>{
+  ev.preventDefault()
+  isBibliotecario =(localStorage.getItem("isBibliotecario"))
+
+   if(isBibliotecario == "true"){
+      window.location = "user/libraria"
+   }else{
+      alert("Você não é bibliotecário!")
+   }
+
+})
 
 function aLogged() {
   let content = ";";
@@ -16,6 +28,35 @@ function aLogged() {
 
   anchor.innerHTML = content;
   anchor.setAttribute("href", url);
+}
+
+function searchByHeader() {
+  let divHeader = document.getElementById("header-actions");
+
+  let input = divHeader.querySelector("input");
+
+  input.addEventListener("focus", () => {
+    document.addEventListener("keypress", (ev) => {
+      if (ev.key === "Enter") {
+        let titulo = input.value.trim(); // pega valor digitado
+
+        if (titulo !== "") {
+          localStorage.setItem("titulo", titulo);
+          window.location = "/browse";
+        }
+      }
+    });
+  });
+
+  let button = divHeader.querySelector("button");
+
+  button.addEventListener("click", () => {
+    let titulo = String(input.value).trim();
+    if (titulo != "") {
+      localStorage.setItem("titulo", titulo);
+      window.location = "/browse";
+    }
+  });
 }
 
 async function preencherCategorias() {
@@ -68,10 +109,7 @@ async function preencherAutores() {
       option.value = autor.idAutor;
       option.textContent = autor.nomeAutor;
       if (String(autor.fotoAutor).includes("http")) {
-        option.setAttribute(
-          "data-img",
-          `${autor.fotoAutor}`
-        );
+        option.setAttribute("data-img", `${autor.fotoAutor}`);
       } else {
         option.setAttribute(
           "data-img",

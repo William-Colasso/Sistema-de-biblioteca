@@ -14,6 +14,7 @@
                 document.querySelector('[name="phone"]').value = jsonR.telefone
                 document.querySelector('[name="password"]').value = jsonR.password
                 document.getElementById("isBibliotecario").checked = jsonR.bibliotecario
+                 localStorage.setItem("isBibliotecario", document.getElementById("isBibliotecario").checked)
             }
             console.log(jsonR)
         }
@@ -85,6 +86,8 @@
 
                     editar(user);
 
+                    
+
                     window.location.reload()
                     // Aqui você pode enviar os dados manualmente ou deixar o formulário enviar normalmente:
                     // form.submit();
@@ -102,6 +105,8 @@
             });
 
             const RESPONSEDATA = await RESPONSE.json();
+
+            localStorage.setItem("isBibliotecario", RESPONSEDATA.bibliotecario)
 
             alert("Perfil salvo com sucesso!")
             document.getElementById("chk").checked = false;
