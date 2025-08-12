@@ -10,23 +10,28 @@ body {
     color: #333;
 }
 
-.containerEmprestimo {
+.containerCadastroEmprestimo,
+.containerEdicaoEmprestimo {
     margin-top: 2em;
     background-color: #fff;
-    max-width: 600px;
+    min-width: 500px;
+    max-width: 700px;
     width: 100%;
     padding: 2.5em;
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(0, 92, 170, 0.15);
     animation: fadeIn 1s ease-in-out;
     transition: box-shadow 0.3s ease-in-out;
+    max-height: 85%;
 }
 
-.containerEmprestimo:hover {
+.containerCadastroEmprestimo:hover,
+.containerEdicaoEmprestimo:hover {
     box-shadow: 0 0 40px rgba(0, 92, 170, 0.25);
 }
 
-.containerEmprestimo h1 {
+.containerCadastroEmprestimo h1,
+.containerEdicaoEmprestimo h1 {
     text-align: center;
     margin-bottom: 1.5em;
     font-size: clamp(1.5em, 2.5vw, 2em);
@@ -86,6 +91,7 @@ form button:hover {
         opacity: 0;
         transform: translateY(30px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -93,10 +99,11 @@ form button:hover {
 }
 
 @media (max-width: 768px) {
-    .containerEmprestimo {
+    .containerCadastroEmprestimo {
         padding: 1.5em;
         max-width: 100%;
     }
+
     form input,
     form select {
         font-size: 0.95rem;
@@ -104,11 +111,77 @@ form button:hover {
 }
 
 @media (max-width: 480px) {
-    .containerEmprestimo h1 {
+    .containerCadastroEmprestimo h1 {
         font-size: 1.4em;
     }
+
     form button {
         font-size: 1rem;
         padding: 0.8em;
     }
+}
+
+.containerEmprestimo.register {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    min-width: 100%;
+    width: 200vw;
+    gap: 50vw;
+}
+
+.containerEmprestimo.register div {
+    margin-left:80vw ;
+}
+
+
+
+.containerEmprestimo.edit {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    min-width: 100%;
+    width: 200vw;
+    gap: 50vw;
+}
+
+.containerEmprestimo.edit div {
+    margin-left:80vw ;
+}
+
+
+
+.arrows {
+    
+    position: absolute;
+    color: black;
+    scale: 10;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: row;
+    top: 50%;
+    
+}
+
+.arrows:hover{
+    scale: 11;
+    color: #004480;
+    cursor: pointer;
+}
+
+
+.arrows.left{
+   
+    align-self:  baseline;
+    left:10%
+}
+
+.arrows.right{
+    align-self: last baseline;
+    right: 10%;
 }

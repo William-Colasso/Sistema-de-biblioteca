@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tdesi.sa_sistema_de_biblioteca.model.Emprestimo;
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
 import com.tdesi.sa_sistema_de_biblioteca.model.User;
+import com.tdesi.sa_sistema_de_biblioteca.repository.EmprestimoRepository;
 import com.tdesi.sa_sistema_de_biblioteca.service.EmprestimoService;
 import com.tdesi.sa_sistema_de_biblioteca.service.LivroService;
 import com.tdesi.sa_sistema_de_biblioteca.service.UserService;
@@ -12,11 +13,13 @@ import com.tdesi.sa_sistema_de_biblioteca.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,11 +35,19 @@ public class EmprestimoController {
     EmprestimoService emprestimoService;
 
     @Autowired
+    EmprestimoRepository emprestimoRepository;
+
+    @Autowired
     LivroService livroService;
 
     @Autowired
     UserService userService;
     
+    @GetMapping()
+    public ResponseEntity<List<Emprestimo>> getEmprestimo(){
+        return ResponseEntity.ok().body(emprestimoRepository.findAll());
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Emprestimo> createEmprestimo(@RequestBody Emprestimo emprestimo) {
         Emprestimo save = emprestimoService.save(emprestimo);

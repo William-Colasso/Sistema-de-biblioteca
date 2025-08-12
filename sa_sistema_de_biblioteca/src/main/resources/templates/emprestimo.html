@@ -9,10 +9,7 @@
   <link rel="stylesheet" href="/css/cadastro-emprestimo.css" />
   <link rel="shortcut icon" href="https://estudante.sesisenai.org.br/img/favicon.ico" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <link
-      href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
-      rel="stylesheet"
-    />
+  <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet" />
 
   <title>Cadastro de Empréstimo</title>
 </head>
@@ -38,35 +35,66 @@
     </div>
   </header>
 
-  <div class="containerEmprestimo">
-    <h1>Cadastro de Empréstimo</h1>
-    <form id="formEmprestimo">
+  
+    <i class="fa-solid fa-arrow-right arrows left" id="left" style="rotate: 180deg;"></i>
+    <i class="fa-solid fa-arrow-right arrows right" id="right" ></i>
 
-      <label for="user">Usuário:</label>
-      <select id="user" name="user" required>
-        <option value="">Selecione um usuário</option>
-      </select>
 
-      <label for="livro">Livro:</label>
-      <select id="livro" name="livro" required>
-        <option value="">Selecione um livro</option>
-      </select>
 
-      <label for="dataEmprestimo">Data do Empréstimo:</label>
-      <input type="date" id="dataEmprestimo" name="dataEmprestimo" required />
 
-      <label for="dataDevolucaoPrevista">Data de Devolução Prevista:</label>
-      <input type="date" id="dataDevolucaoPrevista" name="dataDevolucaoPrevista" required />
+  <div class="containerEmprestimo register" id="containerEmprestimo">
 
-      <label for="devolvido">Devolvido:</label>
-      <select id="devolvido" name="devolvido" required>
-        <option value="false">Não</option>
-        <option value="true">Sim</option>
-      </select>
+    <div class="containerCadastroEmprestimo" >
+      <h1>Cadastro de Empréstimo</h1>
+      <form id="formEmprestimo">
 
-      <button type="submit">Cadastrar</button>
-    </form>
+        <label for="user">Usuário:</label>
+        <select id="user" name="user" required>
+          <option value="">Selecione um usuário</option>
+        </select>
+
+        <label for="livro">Livro:</label>
+        <select id="livro" name="livro" required>
+          <option value="">Selecione um livro</option>
+        </select>
+
+        <label for="dataEmprestimo">Data do Empréstimo:</label>
+        <input type="date" id="dataEmprestimo" name="dataEmprestimo" required />
+
+        <label for="dataDevolucaoPrevista">Data de Devolução Prevista:</label>
+        <input type="date" id="dataDevolucaoPrevista" name="dataDevolucaoPrevista" required />
+
+        <label for="devolvido">Devolvido:</label>
+        <select id="devolvido" name="devolvido" required>
+          <option value="false">Não</option>
+          <option value="true">Sim</option>
+        </select>
+
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+
+    <div class="containerEdicaoEmprestimo">
+      <h1>Edição de Empréstimo</h1>
+      <form id="formEditEmprestimo">
+
+        <select name="emprestimosCadastrados" id="emprestimosCadastrados"></select>
+       
+
+        <label for="dataEditDevolucaoPrevista">Data de Devolução Prevista:</label>
+        <input type="date" id="dataEditDevolucaoPrevista" name="dataEditDevolucaoPrevista" required />
+
+        <label for="devolvidoEdit">Devolvido:</label>
+        <select id="devolvidoEdit" name="devolvidoEdit" required>
+          <option value="false">Não</option>
+          <option value="true">Sim</option>
+        </select>
+
+        <button type="submit">Editar</button>
+      </form>
+    </div>
   </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 
