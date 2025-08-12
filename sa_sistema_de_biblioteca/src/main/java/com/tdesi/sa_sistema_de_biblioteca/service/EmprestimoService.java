@@ -1,6 +1,5 @@
 package com.tdesi.sa_sistema_de_biblioteca.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,22 +22,27 @@ public class EmprestimoService {
     @Autowired
     LivroRepository livroRepository;
 
-    @Autowired 
+    @Autowired
     UserRepository userRepository;
 
-
     public Emprestimo save(Emprestimo emprestimo) {
+        // Busca Livro e User do emprestimo
         Livro livro = livroRepository.findById(emprestimo.getLivro().getIdLivro()).get();
         User user = userRepository.findById(emprestimo.getUser().getIdUser()).get();
-        System.out.println(emprestimo.getLivro().getIdLivro());
+
+        // Atualiza o objeto empréstimo com as entidades completas
         emprestimo.setLivro(livro);
         emprestimo.setUser(user);
+
+        // Verifica quantos exemplares do livro estão disponíveis para empréstimo
         int qtdLivros = livroService.quantidadeDisponivel(livro);
 
+        // Se não houver exemplares disponíveis, lança exceção personalizada
         if (qtdLivros < 1) {
             throw new LivroIndisponivelException("Não há exemplares disponíveis para empréstimo.");
         }
 
+        // Salva o empréstimo no banco e retorna o objeto salvo
         return emprestimoRepository.save(emprestimo);
     }
 

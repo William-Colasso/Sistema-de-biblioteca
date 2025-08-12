@@ -23,13 +23,19 @@ public class AutorController {
     
     @GetMapping("/all")
     public List<Autor> getAutor(){
+        // Mapeia uma requisição GET para "/autor/all".
+        // Retorna uma lista com todos os autores cadastrados.
         return autorService.findAll();
     }
 
     @PostMapping("/save")
     public ResponseEntity<Autor> saveAutor(@RequestBody Autor autor){
+        // Mapeia uma requisição POST para "/autor/save".
+        // O corpo da requisição será convertido em um objeto Autor.
+        
         Autor save = autorService.save(autor);
+        // Chama o serviço para salvar o autor no banco de dados.
+
         return ResponseEntity.status(HttpStatus.CREATED).body(save);
     }
-    
 }

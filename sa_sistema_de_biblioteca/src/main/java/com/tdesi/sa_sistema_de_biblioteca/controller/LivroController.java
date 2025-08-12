@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class LivroController {
     @Autowired
     LivroService livroService;
-
     @GetMapping("")
     public List<Livro> getLivros() {
+        // Retorna diretamente a lista obtida no service
         return livroService.getTotalLivros();
     }
-
+    
     @GetMapping("/buscar")
     public ResponseEntity<List<Livro>> buscarLivrosComFiltro(
         @RequestParam(required = false) String titulo,
@@ -38,22 +38,31 @@ public class LivroController {
         @RequestParam(required = false) String sinopse,
         @RequestParam(required = false) Integer quantidadeTotal
     ) {
-        List<Livro> livros = livroService.buscarPorFiltros(titulo, editora, dataPublicacao, idAutor, categoria, sinopse, quantidadeTotal);
+        // Endpoint GET para busca filtrada
+        // Chama o service para filtrar e retorna 200 (OK) com a lista
+        List<Livro> livros = livroService.buscarPorFiltros(
+            titulo, editora, dataPublicacao, idAutor, categoria, sinopse, quantidadeTotal
+        );
         return ResponseEntity.ok(livros);
     }
+    
     @PostMapping("/register")
     public ResponseEntity<Livro> createBook(@RequestBody Livro livro) {
+        // Recebe o objeto no corpo da requisição e salva via service
         Livro save = livroService.save(livro);
+        // Retorna 201 (Created) com o livro salvo
         return ResponseEntity.status(HttpStatus.CREATED).body(save);
     }
-
+    
     @GetMapping("/relatorio")
     public String getRelatorio(@RequestParam String titulo) {
+        // Recebe o título como parâmetro obrigatório
         return livroService.relatorio(titulo);
     }
-
+    
     @GetMapping("/editoras")
     public EditoraLivro[] getEditora() {
+        // O retorno é um array de valores do enum EditoraLivro
         return EditoraLivro.values();
     }
 
