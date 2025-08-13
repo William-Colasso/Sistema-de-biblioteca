@@ -23,7 +23,6 @@ public enum CategoriaLivro {
     INFANTIL(20),
     JUVENIL(21),
 
-    // Categorias SENAI / Técnicas
     INDUSTRIA(22),
     ELETRICIDADE(23),
     MECANICA(24),
