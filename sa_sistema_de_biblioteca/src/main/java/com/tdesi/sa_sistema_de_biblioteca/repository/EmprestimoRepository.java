@@ -9,15 +9,22 @@ import com.tdesi.sa_sistema_de_biblioteca.model.Emprestimo;
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
 import com.tdesi.sa_sistema_de_biblioteca.model.User;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Repository
-public interface EmprestimoRepository extends JpaRepository<Emprestimo,Long> {
-    @Query("SELECT COUNT(e) FROM Emprestimo e WHERE e.livro = :livro AND e.devolvido = false")
-    Long countEmprestimosAtivosByLivro(@Param("livro") Livro livro);
+public class EmprestimoRepository  extends ObjectFileRepository<Long, Emprestimo> {
 
-    List<Emprestimo> findByUser(User user);
+    public EmprestimoRepository(Class<Emprestimo> typeClass, String idFieldName) throws IOException {
+        super(typeClass, "idEmprestimo");
+    }
 
-    List<Emprestimo> findByDevolvido(boolean bool);
+
+    public List<Emprestimo> findByUser(User user){
+        List<Emprestimo> emprestimos = new ArrayList<>();
+        return emprestimos ;
+    }
+
 }

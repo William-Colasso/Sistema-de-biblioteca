@@ -1,5 +1,6 @@
 package com.tdesi.sa_sistema_de_biblioteca.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,7 +23,7 @@ public class UserService {
     @Autowired
     private EmprestimoRepository emprestimoRepository;
 
-    public RelatorioEmprestimosDTO gerarRelatorioEmprestimos(Long idUsuario) {
+    public RelatorioEmprestimosDTO gerarRelatorioEmprestimos(Long idUsuario) throws RuntimeException, IOException {
         // Busca usuário pelo ID ou lança exceção se não existir
         User user = userRepository.findById(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
