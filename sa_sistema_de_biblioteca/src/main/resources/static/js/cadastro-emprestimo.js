@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await preencherLivros();
     await preencherUsuarios();
     await preencherEmprestimosCadastrados();
+    updateEmprestimo()
 
     let leftArrow = document.getElementById("left");
     let rightArrow = document.getElementById("right");
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (response.ok) {
                 alert("Empréstimo cadastrado com sucesso!");
-                form.reset();
+                window.location.reload()
             } else {
                 const errorData = await response.json();
                 alert("Erro ao cadastrar empréstimo: " + (errorData.message || response.statusText));
@@ -78,7 +79,7 @@ async function preencherEmprestimosCadastrados() {
 
         emprestimos.forEach((e) => {
             const option = document.createElement("option");
-            option.value = e.idEmprestimo;
+            option.value = JSON.stringify(e);
             option.textContent = `${e.livro.titulo} — ${e.user.nome}`;
             select.appendChild(option);
         });
@@ -125,4 +126,59 @@ async function preencherUsuarios() {
     } catch (error) {
         console.error("Erro ao buscar usuários:", error);
     }
+
+
+
+    
+}
+
+function updateEmprestimo() {
+        
+    let emprestimosCadastradosSelect = document.getElementById("emprestimosCadastrados")
+    let editData = document.getElementById("dataEditDevolucaoPrevista")
+    let devolvidoEdit = document.getElementById("devolvidoEdit")
+    let editEmprestimoButton = document.getElementById("editEmprestimo")
+    let emprestimo;
+
+    emprestimosCadastradosSelect.addEventListener("input", () => {
+        let e = JSON.parse(emprestimosCadastradosSelect.value)
+        emprestimo = e;
+        editData.value = e.dataDevolucaoPrevista
+        devolvidoEdit.value = e.devolvido
+
+
+    });
+
+    editEmprestimoButton.addEventListener("click", async (e)=>{
+        e.preventDefault()
+        if(emprestimosCadastradosSelect.value == ""){
+            alert("Por favor selecione um empréstimo!")
+            return;
+        }
+
+        const mapBody = new Map()
+
+        mapBody.set("dataDevolucaoPrevista", editData.value)
+        mapBody.set("devolvido", devolvidoEdit.value === "true")
+
+
+        console.log(emprestimo)
+        const bodyResponse = {
+            dataDevolucaoPrevista:editData.value,
+            devolvido: (devolvidoEdit.value === "true")
+        }
+        const RESPOSE = await fetch(`/loan/update/${emprestimo.idEmprestimo}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(bodyResponse)
+        })
+
+        if(RESPOSE.status == 200){
+            alert("Empréstimo editado!");
+            window.location.reload()
+        }
+    })
+
 }
