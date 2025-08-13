@@ -33,9 +33,6 @@ public class EmprestimoController {
     EmprestimoService emprestimoService;
 
     @Autowired
-    EmprestimoRepository emprestimoRepository;
-
-    @Autowired
     LivroService livroService;
 
     @Autowired
@@ -44,7 +41,7 @@ public class EmprestimoController {
     @GetMapping()
     public ResponseEntity<List<Emprestimo>> getEmprestimo() {
         // Retorna status 200 (OK) com a lista no corpo da resposta
-        return ResponseEntity.ok().body(emprestimoRepository.findAll());
+        return ResponseEntity.ok().body(emprestimoService.findAllNotDevolvido());
     }
 
     @PostMapping("/create")

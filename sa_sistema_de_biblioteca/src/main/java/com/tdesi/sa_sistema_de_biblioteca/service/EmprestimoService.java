@@ -1,5 +1,7 @@
 package com.tdesi.sa_sistema_de_biblioteca.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +53,9 @@ public class EmprestimoService {
             throw new RuntimeException("Emprestimo não encontrado.");
         }
         return emprestimoRepository.findById(id).get();
+    }
+
+    public List<Emprestimo> findAllNotDevolvido(){
+        return emprestimoRepository.findByDevolvido(false);
     }
 }

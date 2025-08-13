@@ -18,4 +18,6 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo,Long> {
     Long countEmprestimosAtivosByLivro(@Param("livro") Livro livro);
 
     List<Emprestimo> findByUser(User user);
+
+    List<Emprestimo> findByDevolvido(boolean bool);
 }
