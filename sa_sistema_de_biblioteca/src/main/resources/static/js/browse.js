@@ -78,13 +78,34 @@ function setFilters({
   autor,
   quantidadeTotal,
 }) {
-  document.getElementById("tituloLivro").value = checkArgument(tituloLivro) == null ?document.getElementById("tituloLivro").value  :tituloLivro ;
-  document.getElementById("editora").value = checkArgument(editora) == null ? document.getElementById("editora").value :editora ;
-  document.getElementById("anoPublicacao").value = checkArgument(anoPublicacao) == null ? document.getElementById("anoPublicacao").value :anoPublicacao ;
-  document.getElementById("sinopse").value = checkArgument(sinopse) == null ? document.getElementById("sinopse").value :sinopse ;
-  document.getElementById("categoriaLivro").value = checkArgument(categoriaLivro) == null ?document.getElementById("categoriaLivro").value  :categoriaLivro ;
-  document.getElementById("autor").value = checkArgument(autor) == null ?document.getElementById("autor").value  :autor ;
-  document.getElementById("quantidadeTotal").value = checkArgument(quantidadeTotal) == null ?document.getElementById("quantidadeTotal").value  :quantidadeTotal ;
+  document.getElementById("tituloLivro").value =
+    checkArgument(tituloLivro) == null
+      ? document.getElementById("tituloLivro").value
+      : tituloLivro;
+  document.getElementById("editora").value =
+    checkArgument(editora) == null
+      ? document.getElementById("editora").value
+      : editora;
+  document.getElementById("anoPublicacao").value =
+    checkArgument(anoPublicacao) == null
+      ? document.getElementById("anoPublicacao").value
+      : anoPublicacao;
+  document.getElementById("sinopse").value =
+    checkArgument(sinopse) == null
+      ? document.getElementById("sinopse").value
+      : sinopse;
+  document.getElementById("categoriaLivro").value =
+    checkArgument(categoriaLivro) == null
+      ? document.getElementById("categoriaLivro").value
+      : categoriaLivro;
+  document.getElementById("autor").value =
+    checkArgument(autor) == null
+      ? document.getElementById("autor").value
+      : autor;
+  document.getElementById("quantidadeTotal").value =
+    checkArgument(quantidadeTotal) == null
+      ? document.getElementById("quantidadeTotal").value
+      : quantidadeTotal;
 }
 
 function getFilters() {
@@ -195,31 +216,14 @@ async function search(isFilterMode) {
 
       div.appendChild(img);
       div.appendChild(p);
+
+      div.addEventListener("click", () => {
+        window.location.href = "/bookPage?titulo=" + encodeURIComponent(livro.titulo);
+
+      });
       containerLivros.appendChild(div);
     });
   }
-
-  if (Array.isArray(arrayBooks)) {
-    const containerLivros = document.getElementById("containerLivros");
-    containerLivros.innerHTML = "";
-    arrayBooks.forEach((livro) => {
-      let div = document.createElement("div");
-      let img = document.createElement("img");
-      let p = document.createElement("p");
-      div.setAttribute("class", "cardLivro");
-      if (String(livro.imagemCapa).includes("http")) {
-        img.setAttribute("src", `${livro.imagemCapa}`);
-      } else {
-        img.setAttribute("src", `data:image/png;base64,${livro.imagemCapa}`);
-      }
-      p.innerText = `${livro.titulo}`;
-
-      div.appendChild(img);
-      div.appendChild(p);
-      containerLivros.appendChild(div);
-    });
-  }
-  console.log(arrayBooks);
 }
 
 function cleanFilters() {

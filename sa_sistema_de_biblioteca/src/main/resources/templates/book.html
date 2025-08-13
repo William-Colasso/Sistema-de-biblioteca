@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detalhes do Livro — SENAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/book.css" />
+    <link rel="stylesheet" href="/css/geral.css" />
+    <link rel="shortcut icon" href="https://estudante.sesisenai.org.br/img/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+
+    <header>
+        <div id="logoDiv">
+          <img
+            src="/img/senai-logo.png"
+            onclick="window.location ='/home'"
+            alt="Imagem logotipo do SENAI de Santa Catarina"
+          />
+          <p>Sistemas de bibliotecas SENAI</p>
+        </div>
+  
+        <nav>
+          <a href="/home">Home <i class="fa-solid fa-house"></i> </a>
+          <a id="account" href="/user/account"
+            >Crie sua conta/Ver perfil <i class="fa-solid fa-user"></i
+          ></a>
+          <a href="/browse">Nosso acervo <i class="fa-solid fa-book"></i></a>
+          <a href="/categorias"
+            >Categorias <i class="fa-regular fa-bookmark"></i>
+          </a>
+          <a id="lastItemNav" href="/user/libraria"
+            >Seção bibliotecário <i class="fa-solid fa-user-secret"></i
+          ></a>
+        </nav>
+  
+        <div id="header-actions">
+          <input type="text" placeholder="Buscar livros..." />
+          <button><i class="fas fa-search"></i></button>
+        </div>
+      </header>
+
+
+      
+    <main class="container">
+
+        <!-- Capa do livro -->
+        <aside class="card-preview">
+            <img class="book-cover" src="/img/livro-exemplo.jpg" alt="Capa do livro" />
+        </aside>
+
+        <!-- Informações -->
+        <section class="card-form">
+            <h1>Princípios da Terapia Cognitiva</h1>
+            <p><strong>Autor:</strong> Judith S. Beck</p>
+            <p><strong>Editora:</strong> Artmed</p>
+            <p><strong>Data de Publicação:</strong> 2007</p>
+            <p><strong>Quantidade disponível:</strong> 4 unidades</p>
+
+            <h2>Sinopse</h2>
+            <p>
+                Este livro apresenta os fundamentos da terapia cognitiva, abordando conceitos, técnicas e aplicações
+                clínicas. É amplamente utilizado por psicólogos e estudantes da área como referência essencial.
+            </p>
+        </section>
+
+    </main>
+
+
+
+</body>
+</html>

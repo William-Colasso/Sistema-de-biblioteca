@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping
 public class PageController {
+
+    @GetMapping("/bookPage")
+    public String getBookPage(){
+        return "book";
+    }
+
     @GetMapping("/home")
     public String getIndex() {
         return "index";
