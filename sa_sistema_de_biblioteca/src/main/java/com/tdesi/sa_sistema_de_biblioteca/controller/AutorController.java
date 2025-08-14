@@ -1,5 +1,6 @@
 package com.tdesi.sa_sistema_de_biblioteca.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,14 @@ public class AutorController {
     AutorService autorService;
     
     @GetMapping("/all")
-    public List<Autor> getAutor(){
+    public List<Autor> getAutor() throws IOException{
         // Mapeia uma requisição GET para "/autor/all".
         // Retorna uma lista com todos os autores cadastrados.
         return autorService.findAll();
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Autor> saveAutor(@RequestBody Autor autor){
+    public ResponseEntity<Autor> saveAutor(@RequestBody Autor autor) throws IOException{
         // Mapeia uma requisição POST para "/autor/save".
         // O corpo da requisição será convertido em um objeto Autor.
         

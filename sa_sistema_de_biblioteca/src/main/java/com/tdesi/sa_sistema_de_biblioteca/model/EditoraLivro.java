@@ -115,4 +115,9 @@ public enum EditoraLivro {
     public String getNomeAmigavel() {
         return nomeAmigavel;
     }
+
+    boolean equalsIgnoreCase(String editora) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'equalsIgnoreCase'");
+    }
 }

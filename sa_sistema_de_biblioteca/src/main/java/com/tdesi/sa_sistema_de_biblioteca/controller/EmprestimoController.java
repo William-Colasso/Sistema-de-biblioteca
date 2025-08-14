@@ -12,6 +12,7 @@ import com.tdesi.sa_sistema_de_biblioteca.service.UserService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -39,13 +40,13 @@ public class EmprestimoController {
     UserService userService;
 
     @GetMapping()
-    public ResponseEntity<List<Emprestimo>> getEmprestimo() {
+    public ResponseEntity<List<Emprestimo>> getEmprestimo() throws IOException {
         // Retorna status 200 (OK) com a lista no corpo da resposta
         return ResponseEntity.ok().body(emprestimoService.findAllNotDevolvido());
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Emprestimo> createEmprestimo(@RequestBody Emprestimo emprestimo) {
+    public ResponseEntity<Emprestimo> createEmprestimo(@RequestBody Emprestimo emprestimo) throws IOException {
         // Recebe o objeto no corpo da requisição e salva via service
         Emprestimo save = emprestimoService.save(emprestimo);
         // Retorna status 201 (Created) com o objeto salvo
@@ -55,7 +56,7 @@ public class EmprestimoController {
     @PatchMapping("/update/{id}")
     public ResponseEntity<Emprestimo> patchEmprestimo(
             @PathVariable Long id,
-            @RequestBody Map<String, Object> camposAtualizados) {
+            @RequestBody Map<String, Object> camposAtualizados) throws IOException {
         // Endpoint PATCH para atualizar parcialmente um empréstimo existente
         // Recebe o ID pela URL e um mapa com os campos a serem alterados
 
@@ -82,13 +83,27 @@ public class EmprestimoController {
                     break;
                 case "idLivro":
                     Long idLivro = Long.parseLong(valor.toString());
-                    Livro livro = livroService.findById(idLivro);
-                    emprestimo.setLivro(livro);
+                    Livro livro;
+                    try {
+                        livro = livroService.findById(idLivro);
+                        emprestimo.setLivro(livro);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                   
                     break;
                 case "idUser":
                     Long idUser = Long.parseLong(valor.toString());
-                    User user = userService.findByID(idUser);
-                    emprestimo.setUser(user);
+                    User user;
+                    try {
+                        user = userService.findById(idUser);
+                        emprestimo.setUser(user);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    
                     break;
                 default:
                     break;

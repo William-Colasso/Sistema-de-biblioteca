@@ -1,5 +1,6 @@
 package com.tdesi.sa_sistema_de_biblioteca.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class LivroController {
     @Autowired
     LivroService livroService;
     @GetMapping("")
-    public List<Livro> getLivros() {
+    public List<Livro> getLivros() throws IOException {
         // Retorna diretamente a lista obtida no service
         return livroService.getTotalLivros();
     }
@@ -37,7 +38,7 @@ public class LivroController {
         @RequestParam(required = false) String categoria,
         @RequestParam(required = false) String sinopse,
         @RequestParam(required = false) Integer quantidadeTotal
-    ) {
+    ) throws IOException {
         // Endpoint GET para busca filtrada
         // Chama o service para filtrar e retorna 200 (OK) com a lista
         List<Livro> livros = livroService.buscarPorFiltros(
@@ -47,7 +48,7 @@ public class LivroController {
     }
     
     @PostMapping("/register")
-    public ResponseEntity<Livro> createBook(@RequestBody Livro livro) {
+    public ResponseEntity<Livro> createBook(@RequestBody Livro livro) throws IOException {
         // Recebe o objeto no corpo da requisição e salva via service
         Livro save = livroService.save(livro);
         // Retorna 201 (Created) com o livro salvo
@@ -55,7 +56,7 @@ public class LivroController {
     }
     
     @GetMapping("/relatorio")
-    public String getRelatorio(@RequestParam String titulo) {
+    public String getRelatorio(@RequestParam String titulo) throws IOException {
         // Recebe o título como parâmetro obrigatório
         return livroService.relatorio(titulo);
     }

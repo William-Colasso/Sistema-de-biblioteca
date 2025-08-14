@@ -17,11 +17,16 @@ import com.tdesi.sa_sistema_de_biblioteca.repository.UserRepository;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+
+    private final EmprestimoRepository emprestimoRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    private EmprestimoRepository emprestimoRepository;
+    public UserService(UserRepository userRepository, EmprestimoRepository emprestimoRepository) {
+        this.userRepository = userRepository;
+        this.emprestimoRepository = emprestimoRepository;
+    }
+
 
     public RelatorioEmprestimosDTO gerarRelatorioEmprestimos(Long idUsuario) throws RuntimeException, IOException {
         // Busca usuário pelo ID ou lança exceção se não existir
@@ -60,20 +65,16 @@ public class UserService {
         return relatorio;
     }
     
-    public User save(User user) {
+    public User save(User user) throws IOException {
         // Valida email
         if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
             throw new IllegalArgumentException("O e-mail deve ser fornecido.");
-        }
-        // Verifica duplicidade de email
-        if (userRepository.findByEmail(user.getEmail()) != null) {
-            throw new IllegalStateException("E-mail já está em uso.");
         }
         // Salva usuário
         return userRepository.save(user);
     }
     
-    public User getUser(String email, String password) {
+    public User getUser(String email, String password) throws IOException {
         // Busca usuário pelo email
         User user = userRepository.findByEmail(email);
         if (user == null) {
@@ -86,7 +87,7 @@ public class UserService {
         return user;
     }
     
-    public User editUser(User user) {
+    public User editUser(User user) throws IOException {
         // Verifica se o usuário existe antes de editar
         if (!userRepository.existsById(user.getIdUser())) {
             throw new RuntimeException("Usuário não encontrado para edição.");
@@ -94,7 +95,7 @@ public class UserService {
         return userRepository.save(user);
     }
     
-    public boolean deleteUser(Long id){
+    public boolean deleteUser(Long id) throws IOException{
         // Exclui usuário se existir
         if (!userRepository.existsById(id)) {
             return false;
@@ -103,7 +104,7 @@ public class UserService {
         return true;
     }
     
-    public User findByID(Long id){
+    public User findById(Long id) throws IOException{
         // Busca usuário pelo ID ou lança exceção
         if (!userRepository.existsById(id)) {
             throw new RuntimeException("Usuário não encontrado.");
@@ -111,7 +112,7 @@ public class UserService {
         return userRepository.findById(id).get();
     }
     
-    public List<User> findAll(){
+    public List<User> findAll() throws IOException{
         // Lista todos os usuários
         return userRepository.findAll();
     }
