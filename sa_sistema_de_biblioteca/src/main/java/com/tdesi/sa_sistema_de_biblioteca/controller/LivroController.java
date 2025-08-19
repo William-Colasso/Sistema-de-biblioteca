@@ -50,9 +50,9 @@ public class LivroController {
     @PostMapping("/register")
     public ResponseEntity<Livro> createBook(@RequestBody Livro livro) throws IOException {
         // Recebe o objeto no corpo da requisição e salva via service
-        Livro save = livroService.save(livro);
+        Livro livroSalvo = livroService.save(livro);
         // Retorna 201 (Created) com o livro salvo
-        return ResponseEntity.status(HttpStatus.CREATED).body(save);
+        return ResponseEntity.status(HttpStatus.CREATED).body(livroSalvo);
     }
     
     @GetMapping("/relatorio")

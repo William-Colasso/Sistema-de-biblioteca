@@ -30,6 +30,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
 
+    // Trata a exceção personalizada chamada LivroIndisponivelException,
+    // Indica que um livro não está disponível para empréstimo.
     @ExceptionHandler(LivroIndisponivelException.class)
     public ResponseEntity<String> handleLivroIndisponivel(LivroIndisponivelException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());

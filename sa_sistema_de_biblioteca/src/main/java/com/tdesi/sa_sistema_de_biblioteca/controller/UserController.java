@@ -43,8 +43,8 @@ public class UserController {
     @GetMapping("/get")
     public ResponseEntity<User> getUser(@RequestParam Long idUser) throws IOException {
         // Retorna um usuário pelo ID passado via parâmetro de query string
-        User user = userService.findById(idUser);
-        return ResponseEntity.ok().body(user);
+        User getUser = userService.findById(idUser);
+        return ResponseEntity.ok().body(getUser);
     }
 
     @GetMapping("/{id}/relatorio-emprestimos")
@@ -71,8 +71,8 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user) throws IOException {
         // Cria um novo usuário recebendo objeto User no corpo da requisição
-        User save = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(save);
+        User userSalvo = userService.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userSalvo);
     }
 
     @PutMapping("/{id}")
@@ -80,8 +80,8 @@ public class UserController {
         // Atualiza dados do usuário identificado pelo ID na URL
         // Força o ID do objeto para garantir atualização do registro correto
         user.setIdUser(id);
-        User edited = userService.editUser(user);
-        return ResponseEntity.ok(edited);
+        User userEditado = userService.editUser(user);
+        return ResponseEntity.ok(userEditado);
     }
 
     @DeleteMapping("/delete/{id}")

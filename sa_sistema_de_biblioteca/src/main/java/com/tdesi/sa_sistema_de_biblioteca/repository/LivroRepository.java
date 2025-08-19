@@ -8,9 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.tdesi.sa_sistema_de_biblioteca.model.Emprestimo;
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
-import com.tdesi.sa_sistema_de_biblioteca.model.User;
 
 @Repository
 @JavaBean
@@ -21,26 +19,26 @@ public class LivroRepository extends ObjectFileRepository<Long, Livro> {
     }
 
     public Livro findByTitulo(String nomeLivro) throws IOException {
-        List<Livro> lista = findAll();
+        List<Livro> listaLivros = findAll();
 
         // Ordenar a lista pelo título (Insertion Sort)
-        for (int i = 1; i < lista.size(); i++) {
-            Livro chave = lista.get(i);
+        for (int i = 1; i < listaLivros.size(); i++) {
+            Livro chave = listaLivros.get(i);
             int j = i - 1;
 
-            while (j >= 0 && lista.get(j).getTitulo().compareToIgnoreCase(chave.getTitulo()) > 0) {
-                lista.set(j + 1, lista.get(j));
+            while (j >= 0 && listaLivros.get(j).getTitulo().compareToIgnoreCase(chave.getTitulo()) > 0) {
+                listaLivros.set(j + 1, listaLivros.get(j));
                 j--;
             }
-            lista.set(j + 1, chave);
+            listaLivros.set(j + 1, chave);
         }
 
         // Busca Binária pelo título
         int inicio = 0;
-        int fim = lista.size() - 1;
+        int fim = listaLivros.size() - 1;
         while (inicio <= fim) {
             int meio = (inicio + fim) / 2;
-            Livro livroMeio = lista.get(meio);
+            Livro livroMeio = listaLivros.get(meio);
             int comparacao = livroMeio.getTitulo().compareToIgnoreCase(nomeLivro);
 
             if (comparacao == 0) {
@@ -58,11 +56,11 @@ public class LivroRepository extends ObjectFileRepository<Long, Livro> {
     public List<Livro> buscarPorFiltros(String titulo, String editora, Date dataPublicacao,
             Long idAutor, String idCategoria, String sinopse,
             Integer quantidadeTotal) throws IOException {
-        List<Livro> lista = findAll(); // Pega todos os livros do arquivo
-        List<Livro> filtrados = new ArrayList<>();
+        List<Livro> listaLivros = findAll(); // Pega todos os livros do arquivo
+        List<Livro> listaFiltrados = new ArrayList<>();
 
         // Filtra manualmente
-        for (Livro livro : lista) {
+        for (Livro livro : listaLivros) {
             boolean incluir = true;
 
             if (titulo != null && !livro.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
@@ -94,23 +92,23 @@ public class LivroRepository extends ObjectFileRepository<Long, Livro> {
             }
 
             if (incluir) {
-                filtrados.add(livro);
+                listaFiltrados.add(livro);
             }
         }
 
         // Ordena pelo título usando Insertion Sort
-        for (int i = 1; i < filtrados.size(); i++) {
-            Livro chave = filtrados.get(i);
+        for (int i = 1; i < listaFiltrados.size(); i++) {
+            Livro chave = listaFiltrados.get(i);
             int j = i - 1;
 
-            while (j >= 0 && filtrados.get(j).getTitulo().compareToIgnoreCase(chave.getTitulo()) > 0) {
-                filtrados.set(j + 1, filtrados.get(j));
+            while (j >= 0 && listaFiltrados.get(j).getTitulo().compareToIgnoreCase(chave.getTitulo()) > 0) {
+                listaFiltrados.set(j + 1, listaFiltrados.get(j));
                 j--;
             }
-            filtrados.set(j + 1, chave);
+            listaFiltrados.set(j + 1, chave);
         }
 
-        return filtrados;
+        return listaFiltrados;
     }
 
 }

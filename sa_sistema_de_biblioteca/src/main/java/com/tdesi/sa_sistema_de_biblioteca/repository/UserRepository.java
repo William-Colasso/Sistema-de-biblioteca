@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
+
 import com.tdesi.sa_sistema_de_biblioteca.model.User;
 
 @Repository
@@ -18,26 +18,26 @@ public class UserRepository extends ObjectFileRepository<Long, User> {
     }
 
     public User findByEmail(String email) throws IOException {
-        List<User> lista = findAll();
+        List<User> listaUser = findAll();
 
         // Ordenar a lista pelo email (Insertion Sort)
-        for (int i = 1; i < lista.size(); i++) {
-            User chave = lista.get(i);
+        for (int i = 1; i < listaUser.size(); i++) {
+            User chave = listaUser.get(i);
             int j = i - 1;
 
-            while (j >= 0 && lista.get(j).getEmail().compareToIgnoreCase(chave.getEmail()) > 0) {
-                lista.set(j + 1, lista.get(j));
+            while (j >= 0 && listaUser.get(j).getEmail().compareToIgnoreCase(chave.getEmail()) > 0) {
+                listaUser.set(j + 1, listaUser.get(j));
                 j--;
             }
-            lista.set(j + 1, chave);
+            listaUser.set(j + 1, chave);
         }
 
         // Busca Binária pelo email
         int inicio = 0;
-        int fim = lista.size() - 1;
+        int fim = listaUser.size() - 1;
         while (inicio <= fim) {
             int meio = (inicio + fim) / 2;
-            User usuarioMeio = lista.get(meio);
+            User usuarioMeio = listaUser.get(meio);
             int comparacao = usuarioMeio.getEmail().compareToIgnoreCase(email);
 
             if (comparacao == 0) {

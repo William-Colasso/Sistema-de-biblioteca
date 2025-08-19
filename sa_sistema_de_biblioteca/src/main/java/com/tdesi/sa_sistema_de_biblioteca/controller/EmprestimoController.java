@@ -48,9 +48,9 @@ public class EmprestimoController {
     @PostMapping("/create")
     public ResponseEntity<Emprestimo> createEmprestimo(@RequestBody Emprestimo emprestimo) throws IOException {
         // Recebe o objeto no corpo da requisição e salva via service
-        Emprestimo save = emprestimoService.save(emprestimo);
+        Emprestimo emprestimoSalvo = emprestimoService.save(emprestimo);
         // Retorna status 201 (Created) com o objeto salvo
-        return ResponseEntity.status(HttpStatus.CREATED).body(save);
+        return ResponseEntity.status(HttpStatus.CREATED).body(emprestimoSalvo);
     }
 
     @PatchMapping("/update/{id}")
