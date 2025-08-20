@@ -61,8 +61,9 @@ public class EmprestimoRepository  extends ObjectFileRepository<Long, Emprestimo
         int contador = 0;
     
         for (Emprestimo e : listaEmprestimos) {
-            if (e.getLivro().equals(livro) && !e.isDevolvido()) {
+            if (e.getLivro().getIdLivro()==livro.getIdLivro() && !e.isDevolvido()) {
                 contador++;
+                System.out.println(contador);
             }
         }
     

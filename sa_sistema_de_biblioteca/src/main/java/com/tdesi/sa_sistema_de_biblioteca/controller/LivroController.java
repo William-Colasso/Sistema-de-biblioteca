@@ -56,7 +56,7 @@ public class LivroController {
     }
     
     @GetMapping("/relatorio")
-    public String getRelatorio(@RequestParam String titulo) throws IOException {
+    public Livro getRelatorio(@RequestParam String titulo) throws IOException {
         // Recebe o título como parâmetro obrigatório
         return livroService.relatorio(titulo);
     }

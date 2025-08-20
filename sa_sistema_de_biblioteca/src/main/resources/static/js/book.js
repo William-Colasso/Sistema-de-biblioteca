@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             throw new Error(`Erro ao buscar livro: ${response.status}`);
         }
 
+        
         const livro = await response.json();
 
         // 3️⃣ Preenche os elementos da página
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector(".card-form h1").textContent = livro.titulo || "Título não informado";
         document.querySelector(".card-form").innerHTML = `
             <h1>${livro.titulo || ""}</h1>
-            <p><strong>Autor:</strong> ${livro.autor ? livro.autor.nome : "Não informado"}</p>
+            <p><strong>Autor:</strong> ${livro.autor ? livro.autor.nomeAutor : "Não informado"}</p>
             <p><strong>Editora:</strong> ${livro.editora || "Não informado"}</p>
             <p><strong>Data de Publicação:</strong> ${livro.anoPublicacao || "Não informado"}</p>
             <p><strong>Quantidade disponível:</strong> ${livro.quantidadeTotal || 0} unidades</p>

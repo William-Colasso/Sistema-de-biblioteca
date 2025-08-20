@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tdesi.sa_sistema_de_biblioteca.model.Autor;
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
+import com.tdesi.sa_sistema_de_biblioteca.repository.AutorRepository;
 import com.tdesi.sa_sistema_de_biblioteca.repository.EmprestimoRepository;
 import com.tdesi.sa_sistema_de_biblioteca.repository.LivroRepository;
 
@@ -16,11 +18,17 @@ public class LivroService {
 
     private final LivroRepository livroRepository;
 
-    @Autowired
-    public LivroService(LivroRepository livroRepository) {
-        this.livroRepository = livroRepository;
-    }
+    private final AutorRepository autorRepository;
 
+
+
+
+    @Autowired
+    public LivroService(LivroRepository livroRepository, AutorRepository autorRepository) {
+        this.livroRepository = livroRepository;
+        this.autorRepository = autorRepository;
+    }
+    
     @Autowired
     EmprestimoRepository emprestimoRepository;
 
@@ -38,12 +46,17 @@ public class LivroService {
     public int quantidadeDisponivel(Livro livro) throws IOException{
         // Calcula a quantidade disponível do livro
         // Subtrai os empréstimos ativos da quantidade total
+        System.out.println(emprestimoRepository.countEmprestimosAtivosByLivro(livro));
         return (int) (livro.getQuantidadeTotal() - emprestimoRepository.countEmprestimosAtivosByLivro(livro));
     }
     
-    public String relatorio(String nomeLivro) throws IOException{
+    public Livro relatorio(String nomeLivro) throws IOException{
         // Gera um relatório em texto com informações do livro pelo título
         Livro livro = livroRepository.findByTitulo(nomeLivro);
+        Autor autor = autorRepository.findById(livro.getAutor().getIdAutor()).get();
+        livro.setAutor(autor);
+        livro.setQuantidadeTotal(quantidadeDisponivel(livro));
+        System.out.println(livro.getAutor().getNomeAutor());
         StringBuilder sb = new StringBuilder();
         sb.append("ID " + livro.getIdLivro() + "\n");
         sb.append("Titulo do livro: " + livro.getTitulo() + "\n");
@@ -51,7 +64,7 @@ public class LivroService {
         sb.append("Quantidade Total: " + livro.getQuantidadeTotal() + "\n");
         sb.append("Quantidade Disponivel: " + quantidadeDisponivel(livro) + "\n");
         sb.append("Quantidade Emprestada: " + emprestimoRepository.countEmprestimosAtivosByLivro(livro));
-        return sb.toString();
+        return livro;
     }
     
     public Livro findById(Long idLivro) throws IOException {
