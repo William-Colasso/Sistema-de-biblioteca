@@ -70,6 +70,9 @@ public class UserService {
         if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
             throw new IllegalArgumentException("O e-mail deve ser fornecido.");
         }
+        if (!(userRepository.findByEmail(user.getEmail()) == null)) {
+            throw new IllegalArgumentException("O e-mail já existe.");
+        }
         // Salva usuário
         return userRepository.save(user);
     }

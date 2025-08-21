@@ -20,9 +20,6 @@ public class LivroService {
 
     private final AutorRepository autorRepository;
 
-
-
-
     @Autowired
     public LivroService(LivroRepository livroRepository, AutorRepository autorRepository) {
         this.livroRepository = livroRepository;
@@ -56,14 +53,6 @@ public class LivroService {
         Autor autor = autorRepository.findById(livro.getAutor().getIdAutor()).get();
         livro.setAutor(autor);
         livro.setQuantidadeTotal(quantidadeDisponivel(livro));
-        System.out.println(livro.getAutor().getNomeAutor());
-        StringBuilder sb = new StringBuilder();
-        sb.append("ID " + livro.getIdLivro() + "\n");
-        sb.append("Titulo do livro: " + livro.getTitulo() + "\n");
-        sb.append("Autor do Livro: " + livro.getAutor().getNomeAutor() + "\n");
-        sb.append("Quantidade Total: " + livro.getQuantidadeTotal() + "\n");
-        sb.append("Quantidade Disponivel: " + quantidadeDisponivel(livro) + "\n");
-        sb.append("Quantidade Emprestada: " + emprestimoRepository.countEmprestimosAtivosByLivro(livro));
         return livro;
     }
     

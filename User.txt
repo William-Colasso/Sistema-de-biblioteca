@@ -1,1 +1,0 @@
-{"idUser":1,"nome":"projeto_gerson","email":"vinicius_andreazza@estudante.sesisenai.org.br","telefone":"11999999999","password":"123456","isBibliotecario":true}
