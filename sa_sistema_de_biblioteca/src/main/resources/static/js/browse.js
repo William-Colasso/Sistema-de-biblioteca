@@ -224,4 +224,6 @@ function cleanFilters() {
   document.querySelectorAll("input, select").forEach((input) => {
     input.value = "";
   });
+
+  document.getElementById("quantidadeTotal").value = 1;
 }
