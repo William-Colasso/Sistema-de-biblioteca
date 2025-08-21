@@ -8,7 +8,6 @@ import java.util.*;
 
 public class ObjectFileRepository<TypeId, T> {
 
-    
     private final String filePath; // Caminho do arquivo onde serão armazenados os objetos em formato JSON
     private final Gson gson; // Biblioteca para conversão de objetos <-> JSON
     private final Class<T> typeClass; // Classe do tipo armazenado
@@ -47,7 +46,7 @@ public class ObjectFileRepository<TypeId, T> {
         }
 
         all.add(entity); // Adiciona o novo/atualizado
-        writeAll(all);   // Salva toda a lista no arquivo
+        writeAll(all); // Salva toda a lista no arquivo
         return entity;
     }
 
@@ -55,7 +54,8 @@ public class ObjectFileRepository<TypeId, T> {
     private TypeId generateNextId(List<T> list) {
         long maxId = 0;
         for (T e : list) {
-            if (e == null) continue;
+            if (e == null)
+                continue;
             TypeId currentId = getIdValue(e);
             if (currentId != null) {
                 long val = ((Number) currentId).longValue();
@@ -99,9 +99,12 @@ public class ObjectFileRepository<TypeId, T> {
 
     // Busca um objeto pelo ID
     public Optional<T> findById(TypeId id) throws IOException {
-        return findAll().stream()
-                .filter(e -> Objects.equals(getIdValue(e), id))
-                .findFirst();
+        List<T> all = findAll();
+
+        for(T t : all){
+             if(Objects.equals(getIdValue(t), id)) return Optional.of(t);
+        }
+        return null;
     }
 
     // Retorna todos os objetos salvos no arquivo
@@ -120,7 +123,17 @@ public class ObjectFileRepository<TypeId, T> {
     // Exclui um objeto pelo ID
     public void deleteById(TypeId id) throws IOException {
         List<T> all = findAll();
-        all.removeIf(e -> Objects.equals(getIdValue(e), id)); // Remove o item com o ID correspondente
+        T toRemove = null;
+        for (T t : all) {
+            if (Objects.equals(getIdValue(t), id)) { //verifica o id
+                toRemove = t;
+                break; // para o for
+            }
+        }
+
+        if (toRemove != null) {
+            all.remove(toRemove); // remove o objeto
+        }
         writeAll(all); // Reescreve o arquivo com a lista atualizada
     }
 
@@ -148,7 +161,8 @@ public class ObjectFileRepository<TypeId, T> {
         }
     }
 
-    // Verifica se existe um objeto com o ID informado usando QuickSort + Binary Search
+    // Verifica se existe um objeto com o ID informado usando QuickSort + Binary
+    // Search
     public boolean existsById(TypeId id) throws IOException {
         List<T> list = findAll();
         quickSort(list, 0, list.size() - 1); // Ordena a lista
@@ -172,10 +186,14 @@ public class ObjectFileRepository<TypeId, T> {
             Comparable<TypeId> currentId = (Comparable<TypeId>) getIdValue(list.get(j));
             if (currentId.compareTo(pivot) <= 0) {
                 i++;
-                Collections.swap(list, i, j);
+                T temp = list.get(i);
+                list.set(i, list.get(j));
+                list.set(j, temp);
             }
         }
-        Collections.swap(list, i + 1, high);
+        T temp = list.get(high);
+        list.set(high, list.get(i+1));
+        list.set(i+1, temp);
         return i + 1;
     }
 
@@ -185,6 +203,7 @@ public class ObjectFileRepository<TypeId, T> {
         while (left <= right) {
             int mid = (left + right) / 2;
             Comparable<TypeId> midId = (Comparable<TypeId>) getIdValue(list.get(mid));
+
             int cmp = midId.compareTo(id);
 
             if (cmp == 0)
