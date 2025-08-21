@@ -1,0 +1,1 @@
+{"idUser":1,"nome":"Vinicius","email":"vinicius@gmail.com","telefone":"11999999999","password":"123456","isBibliotecario":true}

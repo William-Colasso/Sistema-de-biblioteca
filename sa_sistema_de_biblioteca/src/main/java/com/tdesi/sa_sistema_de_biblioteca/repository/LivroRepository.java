@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.tdesi.sa_sistema_de_biblioteca.model.EditoraLivro;
 import com.tdesi.sa_sistema_de_biblioteca.model.Livro;
 
 @Repository
@@ -54,11 +55,10 @@ public class LivroRepository extends ObjectFileRepository<Long, Livro> {
     }
 
     public List<Livro> buscarPorFiltros(String titulo, String editora, Date dataPublicacao,
-            Long idAutor, String idCategoria, String sinopse,
+            Long idAutor, String categoria, String sinopse,
             Integer quantidadeTotal) throws IOException {
         List<Livro> listaLivros = findAll(); // Pega todos os livros do arquivo
         List<Livro> listaFiltrados = new ArrayList<>();
-
         // Filtra manualmente
         for (Livro livro : listaLivros) {
             boolean incluir = true;
@@ -67,11 +67,11 @@ public class LivroRepository extends ObjectFileRepository<Long, Livro> {
                 incluir = false;
             }
 
-            if (editora != null && !livro.getEditora().equals(editora)) {
+            if (editora != null && !livro.getEditora().toString().equals(editora)) {
                 incluir = false;
             }
-
-            if (dataPublicacao != null && !livro.getAnoPublicacao().equals(dataPublicacao)) {
+            
+            if (dataPublicacao != null && !livro.getAnoPublicacao().after(dataPublicacao)) {
                 incluir = false;
             }
 
@@ -79,7 +79,7 @@ public class LivroRepository extends ObjectFileRepository<Long, Livro> {
                 incluir = false;
             }
 
-            if (idCategoria != null && !livro.getCategoriaLivro().equals(idCategoria)) {
+            if (categoria != null && !livro.getCategoriaLivro().toString().equals(categoria)) {
                 incluir = false;
             }
 
@@ -87,7 +87,7 @@ public class LivroRepository extends ObjectFileRepository<Long, Livro> {
                 incluir = false;
             }
 
-            if (quantidadeTotal != null && livro.getQuantidadeTotal() != quantidadeTotal) {
+            if (quantidadeTotal != null && livro.getQuantidadeTotal() < quantidadeTotal) {
                 incluir = false;
             }
 
