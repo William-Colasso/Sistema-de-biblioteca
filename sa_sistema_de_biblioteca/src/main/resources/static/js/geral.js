@@ -1,3 +1,10 @@
+document.getElementById("lastItemNav").addEventListener("click", (e)=>{
+  e.preventDefault()
+  alert("Indo para ... /user/libraria")
+  window.location.href = "user/libraria"
+})
+
+
 let tomSelectInstance;
 searchByHeader();
 aLogged();
