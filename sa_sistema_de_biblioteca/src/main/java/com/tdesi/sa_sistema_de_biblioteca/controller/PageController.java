@@ -44,7 +44,6 @@ public class PageController {
         return "categorias";
     }
 
-
     @GetMapping("/emprestimo/register")
     public String getRegisterEmprestimo(){
         return "emprestimo";

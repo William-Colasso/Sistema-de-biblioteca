@@ -36,11 +36,7 @@ public class EmprestimoService {
     public Emprestimo save(Emprestimo emprestimo) throws IOException {
         // Busca Livro e User do emprestimo
         Livro livro = livroRepository.findById(emprestimo.getLivro().getIdLivro()).get();
-        User user = userRepository.findById(emprestimo.getUser().getIdUser()).get();
 
-        // Atualiza o objeto empréstimo com as entidades completas
-        emprestimo.setLivro(livro);
-        emprestimo.setUser(user);
 
         // Verifica quantos exemplares do livro estão disponíveis para empréstimo
         int qtdLivros = livroService.quantidadeDisponivel(livro);
@@ -62,6 +58,15 @@ public class EmprestimoService {
     }
 
     public List<Emprestimo> findAllNotDevolvido() throws IOException{
-        return emprestimoRepository.findByDevolvido(false);
+        List<Emprestimo> listaEmprestimo = emprestimoRepository.findByDevolvido(false);
+        listaEmprestimo.forEach(e -> {
+            try {
+                e.setLivro(livroRepository.findById(e.getLivro().getIdLivro()).get());
+                e.setUser(userRepository.findById(e.getUser().getIdUser()).get());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+        return listaEmprestimo;
     }
 }

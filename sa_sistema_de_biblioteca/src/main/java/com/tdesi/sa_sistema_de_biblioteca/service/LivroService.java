@@ -43,7 +43,6 @@ public class LivroService {
     public int quantidadeDisponivel(Livro livro) throws IOException{
         // Calcula a quantidade disponível do livro
         // Subtrai os empréstimos ativos da quantidade total
-        System.out.println(emprestimoRepository.countEmprestimosAtivosByLivro(livro));
         return (int) (livro.getQuantidadeTotal() - emprestimoRepository.countEmprestimosAtivosByLivro(livro));
     }
     
